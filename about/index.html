@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>关于</title>
+    <script>
+      // Apply saved theme early to avoid FOUC
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = saved ? saved === 'dark' : systemDark;
+          var root = document.documentElement;
+          if (isDark) root.classList.add('dark'); else root.classList.remove('dark');
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="preload" href="/assets/fonts/LXGWBright-Light.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/LXGWBright-LightItalic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/LXGWBright-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/LXGWBright-Italic.woff2" as="font" type="font/woff2" crossorigin>
+  </head>
+  <body class="bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 selection:bg-indigo-500/30">
+    <header class="fixed top-0 inset-x-0 z-50">
+      <nav class="max-w-6xl mx-auto mt-2 px-4 py-2 rounded-xl border border-black/5 dark:border-white/10 bg-white/40 dark:bg-neutral-900/30 backdrop-blur-2xl">
+          <div class="flex items-center justify-between">
+            <a href="/" class="text-sm font-semibold tracking-wide text-neutral-900 dark:text-neutral-100" data-i18n="site.title">
+              香港中文大学（深圳）游戏研究社
+            </a>
+            <div id="navTabs" data-active="about" class="hidden md:flex relative items-center gap-3 text-sm">
+              <span id="navIndicator" class="nav-indicator absolute rounded-lg opacity-0"></span>
+              <a href="/" data-tab="home" data-nav class="px-3 py-1 rounded-lg transition-colors text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white" data-i18n="nav.home">Home</a>
+              <a href="/projects/" data-tab="projects" data-nav class="px-3 py-1 rounded-lg transition-colors text-neutral-600 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white" data-i18n="nav.projects">Projects</a>
+              <a href="/about/" data-tab="about" data-nav class="px-3 py-1 rounded-lg transition-colors text-neutral-900 dark:text-white" data-i18n="nav.about">About</a>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="themeToggle" aria-label="Toggle theme" class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-black/5 dark:border-white/10 bg-white/40 hover:bg-white/60 dark:bg-neutral-800/30 dark:hover:bg-neutral-700/40 text-neutral-900 dark:text-neutral-100 transition-colors">
+                <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+                <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M10 15a5 5 0 100-10 5 5 0 000 10zm0 5a1 1 0 011-1h0a1 1 0 110 2h0a1 1 0 01-1-1zm0-20a1 1 0 011 1h0a1 1 0 11-2 0h0a1 1 0 011-1zm10 10a1 1 0 01-1 1h0a1 1 0 110-2h0a1 1 0 011 1zM1 10a1 1 0 011-1h0a1 1 0 110 2h0A1 1 0 011 10zm15.657-6.657a1 1 0 010 1.414h0a1 1 0 11-1.414-1.414h0a1 1 0 011.414 0zM4.757 15.243a1 1 0 010 1.414h0a1 1 0 11-1.414-1.414h0a1 1 0 011.414 0zM15.657 15.243a1 1 0 011.414 0h0a1 1 0 11-1.414 1.414h0a1 1 0 010-1.414zM4.757 4.757A1 1 0 003.343 3.343h0A1 1 0 114.757 4.757z"/></svg>
+              </button>
+              <button id="langToggle" class="text-sm px-3 py-2 rounded-lg border border-black/5 dark:border-white/10 bg-white/40 hover:bg-white/60 dark:bg-neutral-800/30 dark:hover:bg-neutral-700/40 text-neutral-900 dark:text-neutral-100 transition-colors">EN</button>
+            </div>
+          </div>
+      </nav>
+    </header>
+
+    <div id="swup" class="swup-fade opacity-0">
+      <main class="max-w-6xl mx-auto p-4 pt-24">
+        
+<div class="max-w-3xl mx-auto">
+  
+  
+  <article data-locale="en" class="md-content" style="display:none">
+    <h1>About</h1>
+<hr>
+<p>Hi, welcome to the Game Research Society at The Chinese University of Hong Kong, Shenzhen!</p>
+<p>This is the official website of the Game Research Society, aggregating game projects developed by students of The Chinese University of Hong Kong, Shenzhen.</p>
+<p>This site aims to provide CUHK‑Shenzhen students with a platform to showcase their game projects and find teams. Here, you can discover various student‑created indie games, get demo builds, or contact the developers. We encourage teams to include contact information and recruitment needs in their project pages so that students interested in game development can proactively reach out.</p>
+<h1>I want to submit my game!</h1>
+<hr>
+<p>We welcome submissions via Pull Request. Please note that we currently accept only indie games developed by CUHK‑Shenzhen students. For team‑developed projects, please first obtain unanimous consent from all team members. For company‑developed projects, please provide additional information so we can determine whether it is suitable to display on this site.</p>
+<p>When you wish to submit, please follow these steps:</p>
+<ol>
+<li>Fork this repository</li>
+<li>Create your project folder under <code>src/projects/</code> and add <code>index.md</code></li>
+<li>Add assets such as a <code>banner</code> and <code>screenshots</code>, and ensure they are properly configured in <code>index.md</code></li>
+<li>Open a Pull Request, state your name and student ID in the description, and wait for it to be merged</li>
+</ol>
+<p>If you are not familiar with this process, you may directly use your university email to send the relevant information about your game to the email address below. We will update it as soon as possible after approval.</p>
+<h1>Contact</h1>
+<hr>
+<p>For any questions or suggestions, feel free to contact us via email: st_gamingodyssey [at] <a href="http://link.cuhk.edu.cn">link.cuhk.edu.cn</a></p>
+
+  </article>
+  <article data-locale="cn" class="md-content">
+    <h1>关于</h1>
+<hr>
+<p>嗨，欢迎到访香港中文大学（深圳）游戏研究社！</p>
+<p>这里是游戏研究社的官方网站，整合了香港中文大学（深圳）的同学们开发的游戏项目。</p>
+<p>本站旨在为香港中文大学（深圳）的同学们提供一个展示自己的游戏项目，寻找组织的平台。在这里，你可以看到各类由同学自主独立开发的游戏，获取试玩版，或是与开发者联系。我们鼓励有需求的开发团队在自己的项目中添加联系方式与招募需求，以便有志于加入游戏开发的同学们主动联系。</p>
+<h1>我想投稿我开发的游戏！</h1>
+<hr>
+<p>欢迎通过 Pull Request 的方式投稿你的游戏项目。但请注意，我们现在仅接受由香港中文大学（深圳）的同学开发的独立游戏。如果是团队开发的项目，请先取得团队中成员的一致同意。如果是企业开发的项目，请提供更多相关信息供我们判断是否适合展示于本站。</p>
+<p>当您希望投稿时，请按照以下步骤：</p>
+<ol>
+<li>Fork 本仓库</li>
+<li>在 <code>src/projects/</code> 下新建你的项目文件夹，并添加 <code>index.md</code></li>
+<li>为你的项目添加 <code>banner</code> 与 <code>screenshots</code> 等资源，并确保它们被正确配置在 <code>index.md</code> 中</li>
+<li>提交 Pull Request，在 Description 中标明自己的身份与学号，等待合并</li>
+</ol>
+<p>若您对这一过程不太熟悉，您可直接 <strong>使用学校邮箱</strong> 将希望投稿的游戏的相关信息发送至下方的邮箱中。我们在审核通过后会尽快更新。</p>
+<h1>联系</h1>
+<hr>
+<p>如有任何疑问、建议，欢迎通过邮箱联系我们：st_gamingodyssey [at] <a href="http://link.cuhk.edu.cn">link.cuhk.edu.cn</a></p>
+
+  </article>
+</div>
+
+
+
+      </main>
+    </div>
+
+    <script>
+      (function() {
+        // Register service worker for font caching
+        try {
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+          }
+        } catch (e) {}
+        var root = document.documentElement;
+        var btn = document.getElementById('themeToggle');
+        var iconMoon = document.getElementById('iconMoon');
+        var iconSun = document.getElementById('iconSun');
+        function setIcon(dark) {
+          if (!iconMoon || !iconSun) return;
+          if (dark) { iconMoon.classList.add('hidden'); iconSun.classList.remove('hidden'); }
+          else { iconSun.classList.add('hidden'); iconMoon.classList.remove('hidden'); }
+        }
+        // Do not bind here to avoid double handlers; handled in bindUi()
+
+        // Minimal i18n for nav and CTA
+        var dict = { cn: {"site.title":"香港中文大学（深圳）游戏研究社","site.description":"玩耍，创造，分享","nav.home":"首页","nav.projects":"项目","nav.about":"关于","hero.cta":"查看项目"}, en: {"site.title":"CUHK(SZ) Game Odyssey","site.description":"Play, Create, Share","nav.home":"Home","nav.projects":"Projects","nav.about":"About","hero.cta":"View Projects"} };
+        var rootLocale = (localStorage.getItem('locale') || 'cn');
+        if (rootLocale === 'zh') rootLocale = 'cn';
+        var langToggle = document.getElementById('langToggle');
+        function applyLocale(locale) {
+          // Backward compatibility: map 'zh' -> 'cn'
+          if (locale === 'zh') locale = 'cn';
+          var data = (dict && dict[locale]) || (dict && dict.cn) || {};
+          document.querySelectorAll('[data-i18n]').forEach(function(el) {
+            var key = el.getAttribute('data-i18n');
+            if (data[key]) el.textContent = data[key];
+          });
+          root.setAttribute('lang', locale === 'en' ? 'en' : 'zh-CN');
+          // Toggle localized articles on About page
+          try {
+            document.querySelectorAll('article[data-locale]')
+              .forEach(function(a){ a.style.display = (a.getAttribute('data-locale') === locale ? '' : 'none'); });
+            // Reposition nav indicator after labels change width
+            var nav = document.getElementById('navTabs');
+            var indicator = document.getElementById('navIndicator');
+            if (nav && indicator) {
+              var activeKey = nav.getAttribute('data-active');
+              var target = nav.querySelector('a[data-tab="' + activeKey + '"]');
+              if (target) {
+                var r = target.getBoundingClientRect();
+                var nr = nav.getBoundingClientRect();
+                indicator.style.left = (r.left - nr.left - 4) + 'px';
+                indicator.style.width = (r.width + 8) + 'px';
+                indicator.style.top = (r.top - nr.top - 2) + 'px';
+                indicator.style.opacity = '1';
+              }
+            }
+          } catch (e) {}
+        }
+        function bindUi() {
+          // Re-select elements after page replacement
+          btn = document.getElementById('themeToggle');
+          iconMoon = document.getElementById('iconMoon');
+          iconSun = document.getElementById('iconSun');
+          langToggle = document.getElementById('langToggle');
+          // Nav indicator follow
+          try {
+            var nav = document.getElementById('navTabs');
+            var indicator = document.getElementById('navIndicator');
+            if (nav && indicator) {
+              var tabs = Array.prototype.slice.call(nav.querySelectorAll('a[data-tab]'));
+              function positionTo(el) {
+                var r = el.getBoundingClientRect();
+                var nr = nav.getBoundingClientRect();
+                indicator.style.left = (r.left - nr.left - 4) + 'px';
+                indicator.style.width = (r.width + 8) + 'px';
+                indicator.style.top = (r.top - nr.top - 2) + 'px';
+                indicator.style.opacity = '1';
+              }
+              var activeKey = nav.getAttribute('data-active');
+              var activeEl = tabs.find(function(t){ return t.getAttribute('data-tab') === activeKey; }) || tabs[0];
+              if (activeEl) positionTo(activeEl);
+              tabs.forEach(function(t){
+                t.addEventListener('mouseenter', function(){ positionTo(t); });
+              });
+              nav.addEventListener('mouseleave', function(){ if (activeEl) positionTo(activeEl); });
+            }
+          } catch (e) {}
+          setIcon(root.classList.contains('dark'));
+          if (btn) {
+            btn.setAttribute('aria-pressed', String(root.classList.contains('dark')));
+          }
+          if (btn && !btn._bound) {
+            btn.addEventListener('click', function() {
+              var isDark = root.classList.toggle('dark');
+              localStorage.setItem('theme', isDark ? 'dark' : 'light');
+              setIcon(isDark);
+              btn.setAttribute('aria-pressed', String(isDark));
+            });
+            btn._bound = true;
+          }
+          try {
+            var savedLocale = localStorage.getItem('locale');
+            if (!savedLocale) {
+              var navLang = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+              navLang = String(navLang || '').toLowerCase();
+              var sys = (navLang.indexOf('zh') === 0 || navLang.indexOf('cn') === 0) ? 'cn' : 'en';
+              localStorage.setItem('locale', sys);
+              savedLocale = sys;
+            }
+            if (savedLocale === 'zh') savedLocale = 'cn';
+            if (langToggle) { langToggle.textContent = savedLocale === 'en' ? 'EN' : 'CN'; }
+            applyLocale(savedLocale);
+            if (langToggle && !langToggle._bound) {
+              langToggle.addEventListener('click', function() {
+                var current = localStorage.getItem('locale') || savedLocale || 'cn';
+                if (current === 'zh') current = 'cn';
+                var next = current === 'cn' ? 'en' : 'cn';
+                localStorage.setItem('locale', next);
+                applyLocale(next);
+                langToggle.textContent = next === 'en' ? 'EN' : 'CN';
+              });
+              langToggle._bound = true;
+            }
+          } catch (e) {}
+        }
+
+        // Initial bind
+        bindUi();
+
+        // Custom page transition: fade out to white/black then navigate
+        var navLinks = document.querySelectorAll('a[data-nav]');
+        var NAV_FADE_MS = 100;
+        navLinks.forEach(function(a) {
+          if (a._boundNav) return;
+          a.addEventListener('click', function(e) {
+            var href = a.getAttribute('href');
+            if (!href || href.startsWith('#') || e.metaKey || e.ctrlKey) return;
+            e.preventDefault();
+            var isDark = root.classList.contains('dark');
+            root.classList.add(isDark ? 'dark-mask' : 'light-mask', 'is-animating');
+            setTimeout(function() { window.location.href = href; }, NAV_FADE_MS);
+          });
+          a._boundNav = true;
+        });
+
+        // Smooth page transitions on load (content only); clear any mask
+        window.addEventListener('load', function() {
+          var container = document.getElementById('swup');
+          if (container) container.classList.remove('opacity-0');
+          root.classList.remove('light-mask','dark-mask','is-animating');
+        });
+      })();
+    </script>
+  </body>
+</html>
