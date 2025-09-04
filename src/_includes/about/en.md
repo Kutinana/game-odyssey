@@ -16,8 +16,8 @@ We welcome submissions via Pull Request. Please note that we currently accept on
 When you wish to submit, please follow these steps:
 
 1. Fork this repository
-2. Create your project folder under `src/projects/` and add `index.md`
-3. Add assets such as a `banner` and `screenshots`, and ensure they are properly configured in `index.md`
+2. Create your project folder under `src/projects/` and add `index.json`
+3. Add assets such as a `banner` and `screenshots`, and ensure they are properly configured in `index.json`
 4. Open a Pull Request, state your name and student ID in the description, and wait for it to be merged
 
 If you are not familiar with this process, you may directly use your university email to send the relevant information about your game to the email address below. We will update it as soon as possible after approval.

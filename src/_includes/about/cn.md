@@ -16,8 +16,8 @@
 当您希望投稿时，请按照以下步骤：
 
 1. Fork 本仓库
-2. 在 `src/projects/` 下新建你的项目文件夹，并添加 `index.md`
-3. 为你的项目添加 `banner` 与 `screenshots` 等资源，并确保它们被正确配置在 `index.md` 中
+2. 在 `src/projects/` 下新建你的项目文件夹，并添加 `index.json`
+3. 为你的项目添加 `banner` 与 `screenshots` 等资源，并确保它们被正确配置在 `index.json` 中
 4. 提交 Pull Request，在 Description 中标明自己的身份与学号，等待合并
 
 若您对这一过程不太熟悉，您可直接 **使用学校邮箱** 将希望投稿的游戏的相关信息发送至下方的邮箱中。我们在审核通过后会尽快更新。
