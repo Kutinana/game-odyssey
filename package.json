@@ -4,8 +4,9 @@
   "description": "Minimal Eleventy-based game project aggregation portal.",
   "main": "index.js",
   "scripts": {
-    "build": "eleventy && tailwindcss -i ./src/_includes/styles/input.css -o ./_site/assets/styles.css",
-    "start": "eleventy --serve"
+    "build": "tailwindcss -i ./src/_includes/styles/input.css -o ./src/assets/styles.css && eleventy",
+    "start": "tailwindcss -i ./src/_includes/styles/input.css -o ./src/assets/styles.css && eleventy --serve",
+    "css:watch": "tailwindcss -i ./src/_includes/styles/input.css -o ./src/assets/styles.css --watch"
   },
   "repository": {
     "type": "git",

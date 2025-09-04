@@ -10,6 +10,9 @@ module.exports = function(eleventyConfig) {
   });
   // Ensure project image assets are published
   eleventyConfig.addPassthroughCopy("src/projects/**/*.{png,jpg,jpeg,gif,webp,avif,svg}");
+  // Ensure built CSS and other static assets are published
+  eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addWatchTarget("src/_includes/styles/input.css");
   // Ensure CNAME is published to the site root (supports keeping CNAME under src/)
   eleventyConfig.addPassthroughCopy({ 'src/CNAME': 'CNAME' });
 
