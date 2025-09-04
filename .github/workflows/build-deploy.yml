@@ -11,6 +11,8 @@ permissions:
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
+    env:
+      ELEVENTY_PATH_PREFIX: ${{ vars.ELEVENTY_PATH_PREFIX }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,8 +26,6 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Build site
-        env:
-          ELEVENTY_PATH_PREFIX: "/game-odyssey/"
         run: npm run build
 
       - name: Deploy to GitHub Pages
@@ -34,3 +34,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           publish_branch: gh-pages
+          cname: ${{ vars.CUSTOM_DOMAIN }}
