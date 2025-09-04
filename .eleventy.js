@@ -10,6 +10,8 @@ module.exports = function(eleventyConfig) {
   });
   // Ensure project image assets are published
   eleventyConfig.addPassthroughCopy("src/projects/**/*.{png,jpg,jpeg,gif,webp,avif,svg}");
+  // Ensure CNAME is published to the site root (supports keeping CNAME under src/)
+  eleventyConfig.addPassthroughCopy({ 'src/CNAME': 'CNAME' });
 
   const pathPrefix = process.env.ELEVENTY_PATH_PREFIX || "/";
   return {
