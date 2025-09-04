@@ -24,6 +24,8 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Build site
+        env:
+          ELEVENTY_PATH_PREFIX: "/game-odyssey/"
         run: npm run build
 
       - name: Deploy to GitHub Pages

@@ -8,10 +8,11 @@ module.exports = function(eleventyConfig) {
         return bd - ad;
       });
   });
+  const pathPrefix = process.env.ELEVENTY_PATH_PREFIX || "/";
   return {
     dir: {
       input: "src"
     },
-    pathPrefix: "/game-odyssey/"
+    pathPrefix
   };
 };

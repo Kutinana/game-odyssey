@@ -1,6 +1,6 @@
-<a href="{{ project.url }}" class="block rounded-lg overflow-hidden bg-neutral-800 hover:bg-neutral-700 transition">
+<a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-neutral-800 hover:bg-neutral-700 transition">
   {% if project.data.banner %}
-  <img src="{{ project.url }}{{ project.data.banner | replace('./','') }}" alt="{{ project.data.title }}" class="w-full h-40 object-cover" />
+  <img src="{{ (project.url | url) }}{{ project.data.banner | replace('./','') }}" alt="{{ project.data.title }}" class="w-full h-40 object-cover" />
   {% endif %}
   <div class="p-4">
     <h3 class="text-base font-semibold text-white">{{ project.data.title }}</h3>
