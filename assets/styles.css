@@ -566,7 +566,7 @@ video {
 
   font-style: normal;
 
-  font-display: block;
+  font-display: swap;
 }
 
 /* LightItalic → Normal Italic (400 italic) */
@@ -581,7 +581,7 @@ video {
 
   font-style: italic;
 
-  font-display: block;
+  font-display: swap;
 }
 
 /* Regular → Bold (700) */
@@ -596,7 +596,7 @@ video {
 
   font-style: normal;
 
-  font-display: block;
+  font-display: swap;
 }
 
 /* Italic → Bold Italic (700 italic) */
@@ -611,10 +611,14 @@ video {
 
   font-style: italic;
 
-  font-display: block;
+  font-display: swap;
 }
 
 html {
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+html.fonts-loaded {
   font-family: "LXGWBright", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
@@ -960,12 +964,6 @@ html {
   overflow: hidden;
 }
 
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .rounded-lg {
   border-radius: 0.5rem;
 }
@@ -1090,6 +1088,10 @@ html {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .tracking-tight {

@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>香港中文大学（深圳）游戏研究社</title>
+    
+    <meta data-locale-title="cn" content="香港中文大学（深圳）游戏研究社">
+    <meta data-locale-title="en" content="CUHK(SZ) Game Odyssey">
+    
     <script>
       // Apply saved theme early to avoid FOUC
       (function() {
@@ -15,12 +19,40 @@
           if (isDark) root.classList.add('dark'); else root.classList.remove('dark');
         } catch (e) {}
       })();
+      // Apply persisted fonts-loaded flag early to avoid re-swap
+      (function(){
+        try {
+          var has = localStorage.getItem('fonts-loaded') === '1';
+          var check = function(q){ try { return document.fonts && document.fonts.check(q); } catch(e){ return false; } };
+          if (has && (check('400 1em "LXGWBright"') || check('1em LXGWBright'))) {
+            document.documentElement.classList.add('fonts-loaded');
+          }
+        } catch (e) {}
+      })();
     </script>
     <link rel="stylesheet" href="/assets/styles.css">
     <link rel="preload" href="/assets/fonts/LXGWBright-Light.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/LXGWBright-LightItalic.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/LXGWBright-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/LXGWBright-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+      // Persist fonts-loaded after first success in this or any tab
+      (function(){
+        if (!('fonts' in document)) return;
+        try {
+          var promises = [
+            document.fonts.load('400 1em "LXGWBright"'),
+            document.fonts.load('700 1em "LXGWBright"'),
+            document.fonts.load('italic 400 1em "LXGWBright"'),
+            document.fonts.load('italic 700 1em "LXGWBright"')
+          ];
+          Promise.all(promises).then(function(){
+            document.documentElement.classList.add('fonts-loaded');
+            try { localStorage.setItem('fonts-loaded','1'); } catch(e) {}
+          });
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class="bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 selection:bg-indigo-500/30">
     <header class="fixed top-0 inset-x-0 z-50">
@@ -93,15 +125,23 @@
           // Backward compatibility: map 'zh' -> 'cn'
           if (locale === 'zh') locale = 'cn';
           var data = (dict && dict[locale]) || (dict && dict.cn) || {};
+          // Optional per-page localized title from meta tags (set server-side)
           document.querySelectorAll('[data-i18n]').forEach(function(el) {
             var key = el.getAttribute('data-i18n');
             if (data[key]) el.textContent = data[key];
           });
           root.setAttribute('lang', locale === 'en' ? 'en' : 'zh-CN');
-          // Toggle localized articles on About page
+          // Toggle any localized elements (titles, team, markdown, etc.)
           try {
-            document.querySelectorAll('article[data-locale]')
-              .forEach(function(a){ a.style.display = (a.getAttribute('data-locale') === locale ? '' : 'none'); });
+            document.querySelectorAll('[data-locale]')
+              .forEach(function(el){ el.style.display = (el.getAttribute('data-locale') === locale ? '' : 'none'); });
+            // Update <title> if per-page localized title is provided
+            try {
+              var metaCn = document.querySelector('meta[data-locale-title="cn"]');
+              var metaEn = document.querySelector('meta[data-locale-title="en"]');
+              var t = (locale === 'en' ? (metaEn && metaEn.getAttribute('content')) : (metaCn && metaCn.getAttribute('content')));
+              if (t && typeof t === 'string' && t.trim().length > 0) { document.title = t; }
+            } catch (e) {}
             // Reposition nav indicator after labels change width
             var nav = document.getElementById('navTabs');
             var indicator = document.getElementById('navIndicator');

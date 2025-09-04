@@ -3,7 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Right Click to Activate Translator</title>
+    <title>按右键启动翻译器</title>
+    
+    <meta data-locale-title="cn" content="按右键启动翻译器">
+    <meta data-locale-title="en" content="Right Click to Activate Translator">
+    
     <script>
       // Apply saved theme early to avoid FOUC
       (function() {
@@ -15,12 +19,40 @@
           if (isDark) root.classList.add('dark'); else root.classList.remove('dark');
         } catch (e) {}
       })();
+      // Apply persisted fonts-loaded flag early to avoid re-swap
+      (function(){
+        try {
+          var has = localStorage.getItem('fonts-loaded') === '1';
+          var check = function(q){ try { return document.fonts && document.fonts.check(q); } catch(e){ return false; } };
+          if (has && (check('400 1em "LXGWBright"') || check('1em LXGWBright'))) {
+            document.documentElement.classList.add('fonts-loaded');
+          }
+        } catch (e) {}
+      })();
     </script>
     <link rel="stylesheet" href="/assets/styles.css">
     <link rel="preload" href="/assets/fonts/LXGWBright-Light.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/LXGWBright-LightItalic.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/LXGWBright-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/assets/fonts/LXGWBright-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <script>
+      // Persist fonts-loaded after first success in this or any tab
+      (function(){
+        if (!('fonts' in document)) return;
+        try {
+          var promises = [
+            document.fonts.load('400 1em "LXGWBright"'),
+            document.fonts.load('700 1em "LXGWBright"'),
+            document.fonts.load('italic 400 1em "LXGWBright"'),
+            document.fonts.load('italic 700 1em "LXGWBright"')
+          ];
+          Promise.all(promises).then(function(){
+            document.documentElement.classList.add('fonts-loaded');
+            try { localStorage.setItem('fonts-loaded','1'); } catch(e) {}
+          });
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class="bg-neutral-50 text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100 selection:bg-indigo-500/30">
     <header class="fixed top-0 inset-x-0 z-50">
@@ -48,7 +80,78 @@
 
     <div id="swup" class="swup-fade opacity-0">
       <main class="max-w-6xl mx-auto p-4 pt-24">
-        <h1>Right Click to Activate Translator</h1>
+        <article class="max-w-3xl mx-auto p-4">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta data-locale-title="cn" content="按右键启动翻译器">
+  <meta data-locale-title="en" content="Right Click to Activate Translator">
+  
+  <header class="mb-6">
+    
+    <img src="/projects/rcat/banner.jpg" alt="" class="w-full h-56 object-cover rounded-lg" />
+    
+    
+    <h1 data-locale="cn" class="text-2xl font-bold mt-4 text-neutral-900 dark:text-white" style="display:none">按右键启动翻译器</h1>
+    <h1 data-locale="en" class="text-2xl font-bold mt-4 text-neutral-900 dark:text-white" style="display:none">Right Click to Activate Translator</h1>
+    
+    
+    
+      
+      <p data-locale="cn" class="text-sm text-neutral-600 dark:text-neutral-300 mt-1" style="display:none">蛸猫生态与行为学实验研究中心</p>
+      <p data-locale="en" class="text-sm text-neutral-600 dark:text-neutral-300 mt-1" style="display:none">Octocat Ecology and Behaviour Experimental Research Institute</p>
+      
+    
+  </header>
+  
+  
+  
+  
+  
+  
+  
+  <div>
+    <article data-locale="cn" class="md-content" style="display:none"><p>《按右键启动翻译器》是一款横版剧情向语言解谜游戏，在寻找失踪的宠物猫“小白”的途中，一定不会发生什么穿越到异世界然后面对陌生的语言和“章鱼猫”顺便要拯救世界这种王道征途的剧情吧……记住，“按右键启动翻译器”。</p>
+</article>
+    <article data-locale="en" class="md-content" style="display:none"><p>Right Click To Activate Translator is a pixel side-scrolling language puzzle game. On your journey to find your missing pet cat “Shiro,” you are transported to an otherworldly realm, facing an unfamiliar language and “Octocats.” Remember, “Right Click to Open the Translator.”</p>
+</article>
+  </div>
+  
+  
+  <section class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+    
+      <img src="/projects/rcat/screenshots/1.jpg" alt="screenshot 1" class="w-full rounded-md" />
+    
+      <img src="/projects/rcat/screenshots/2.jpg" alt="screenshot 2" class="w-full rounded-md" />
+    
+      <img src="/projects/rcat/screenshots/3.jpg" alt="screenshot 3" class="w-full rounded-md" />
+    
+      <img src="/projects/rcat/screenshots/4.jpg" alt="screenshot 4" class="w-full rounded-md" />
+    
+      <img src="/projects/rcat/screenshots/5.jpg" alt="screenshot 5" class="w-full rounded-md" />
+    
+  </section>
+  
+  <script>
+    (function(){
+      try {
+        var locale = localStorage.getItem('locale') || 'cn';
+        if (locale === 'zh') locale = 'cn';
+        document.querySelectorAll('[data-locale]').forEach(function(el){
+          el.style.display = (el.getAttribute('data-locale') === locale ? '' : 'none');
+        });
+      } catch (e) {}
+    })();
+  </script>
+ </article>
+
 
       </main>
     </div>
@@ -81,15 +184,23 @@
           // Backward compatibility: map 'zh' -> 'cn'
           if (locale === 'zh') locale = 'cn';
           var data = (dict && dict[locale]) || (dict && dict.cn) || {};
+          // Optional per-page localized title from meta tags (set server-side)
           document.querySelectorAll('[data-i18n]').forEach(function(el) {
             var key = el.getAttribute('data-i18n');
             if (data[key]) el.textContent = data[key];
           });
           root.setAttribute('lang', locale === 'en' ? 'en' : 'zh-CN');
-          // Toggle localized articles on About page
+          // Toggle any localized elements (titles, team, markdown, etc.)
           try {
-            document.querySelectorAll('article[data-locale]')
-              .forEach(function(a){ a.style.display = (a.getAttribute('data-locale') === locale ? '' : 'none'); });
+            document.querySelectorAll('[data-locale]')
+              .forEach(function(el){ el.style.display = (el.getAttribute('data-locale') === locale ? '' : 'none'); });
+            // Update <title> if per-page localized title is provided
+            try {
+              var metaCn = document.querySelector('meta[data-locale-title="cn"]');
+              var metaEn = document.querySelector('meta[data-locale-title="en"]');
+              var t = (locale === 'en' ? (metaEn && metaEn.getAttribute('content')) : (metaCn && metaCn.getAttribute('content')));
+              if (t && typeof t === 'string' && t.trim().length > 0) { document.title = t; }
+            } catch (e) {}
             // Reposition nav indicator after labels change width
             var nav = document.getElementById('navTabs');
             var indicator = document.getElementById('navIndicator');
