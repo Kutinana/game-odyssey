@@ -8,6 +8,9 @@ module.exports = function(eleventyConfig) {
         return bd - ad;
       });
   });
+  // Ensure project image assets are published
+  eleventyConfig.addPassthroughCopy("src/projects/**/*.{png,jpg,jpeg,gif,webp,avif,svg}");
+
   const pathPrefix = process.env.ELEVENTY_PATH_PREFIX || "/";
   return {
     dir: {
