@@ -4,7 +4,8 @@
   "description": "Minimal Eleventy-based game project aggregation portal.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "eleventy && tailwindcss -i ./src/_includes/styles/input.css -o ./_site/assets/styles.css",
+    "start": "eleventy --serve"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,6 @@
     "@11ty/eleventy": "^3.1.2",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.12"
+    "tailwindcss": "^3.4.14"
   }
 }
