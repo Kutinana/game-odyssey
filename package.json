@@ -1,0 +1,26 @@
+{
+  "name": "game-odyssey",
+  "version": "1.0.0",
+  "description": "Minimal Eleventy-based game project aggregation portal.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kutinana/game-odyssey.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kutinana/game-odyssey/issues"
+  },
+  "homepage": "https://github.com/Kutinana/game-odyssey#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.12"
+  }
+}
