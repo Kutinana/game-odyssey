@@ -1,0 +1,1 @@
+Right Click To Activate Translator is a pixel side-scrolling language puzzle game. On your journey to find your missing pet cat "Shiro," you are transported to an otherworldly realm, facing an unfamiliar language and "Octocats." Remember, "Right Click to Open the Translator."

@@ -1,10 +1,28 @@
+{% set cfg = project.inputPath | readJsonRel('index.json') %}
+{% set zh_title = (cfg.cn_title or '') | trim %}
+{% set en_title = (cfg.en_title or '') | trim %}
+{% set zh_team = (cfg.cn_team or '') | trim %}
+{% set en_team = (cfg.en_team or '') | trim %}
 <a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors">
-  {% if project.data.banner %}
-  <img src="{{ (project.url | url) }}{{ project.data.banner | replace('./','') }}" alt="{{ project.data.title }}" class="w-full h-40 object-cover" />
+  {% if cfg.banner %}
+  <img src="{{ (project.url | url) }}{{ cfg.banner | replace('./','') }}" alt="{{ zh_title or en_title or cfg.title or project.data.title }}" class="w-full h-40 object-cover" />
   {% endif %}
   <div class="p-4">
-    <h3 class="text-base font-semibold">{{ project.data.title }}</h3>
-    <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">{{ project.templateContent | striptags | truncate(100) }}</p>
+    {% if zh_title and en_title %}
+      <h3 data-locale="cn" class="text-base font-semibold" style="display:none">{{ zh_title }}</h3>
+      <h3 data-locale="en" class="text-base font-semibold" style="display:none">{{ en_title }}</h3>
+    {% else %}
+      <h3 class="text-base font-semibold">{{ zh_title or en_title or cfg.title or project.data.title }}</h3>
+    {% endif %}
+    {% set any_team = zh_team or en_team or cfg.team or project.data.team %}
+    {% if any_team %}
+      {% if zh_team and en_team %}
+        <p data-locale="cn" class="text-sm text-neutral-600 dark:text-neutral-300 mt-1" style="display:none">{{ zh_team }}</p>
+        <p data-locale="en" class="text-sm text-neutral-600 dark:text-neutral-300 mt-1" style="display:none">{{ en_team }}</p>
+      {% else %}
+        <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">{{ zh_team or en_team or cfg.team or project.data.team }}</p>
+      {% endif %}
+    {% endif %}
   </div>
 </a>
 

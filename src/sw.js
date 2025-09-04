@@ -1,4 +1,4 @@
-const CACHE_NAME = 'go-fonts-v1';
+const CACHE_NAME = 'go-fonts-v2';
 const FONT_URLS = [
   '/assets/fonts/LXGWBright-Light.woff2',
   '/assets/fonts/LXGWBright-LightItalic.woff2',
@@ -21,13 +21,17 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   const url = new URL(req.url);
-  if (url.pathname.startsWith('/assets/fonts/')) {
+  const isFont = req.destination === 'font' || /\.(?:woff2?|ttf|otf|eot)$/i.test(url.pathname);
+  if (isFont) {
     event.respondWith(
-      caches.match(req).then((cached) => cached || fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
-        return res;
-      }))
+      caches.match(req).then((cached) => {
+        if (cached) return cached;
+        return fetch(req).then((res) => {
+          const copy = res.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+          return res;
+        }).catch(() => cached);
+      })
     );
   }
 });

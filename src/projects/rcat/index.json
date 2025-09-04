@@ -1,0 +1,18 @@
+{
+  "en_title": "Right Click to Activate Translator",
+  "cn_title": "按右键启动翻译器",
+  "banner": "./banner.jpg",
+  "en_team": "Octocat Ecology and Behaviour Experimental Research Institute",
+  "cn_team": "蛸猫生态与行为学实验研究中心",
+  "tags": ["PC", "Puzzle Game", "Conlang"],
+  "date": "2024-08",
+  "screenshots": [
+    "./screenshots/1.jpg",
+    "./screenshots/2.jpg",
+    "./screenshots/3.jpg",
+    "./screenshots/4.jpg",
+    "./screenshots/5.jpg"
+  ],
+  "cn_markdown": "./contents/cn.md",
+  "en_markdown": "./contents/en.md"
+}

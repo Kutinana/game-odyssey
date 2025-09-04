@@ -10,7 +10,7 @@
          url('/assets/fonts/LXGWBright-Light.woff') format('woff');
     font-weight: 400;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
   }
   /* LightItalic → Normal Italic (400 italic) */
   @font-face {
@@ -19,7 +19,7 @@
          url('/assets/fonts/LXGWBright-LightItalic.woff') format('woff');
     font-weight: 400;
     font-style: italic;
-    font-display: block;
+    font-display: swap;
   }
   /* Regular → Bold (700) */
   @font-face {
@@ -28,7 +28,7 @@
          url('/assets/fonts/LXGWBright-Regular.woff') format('woff');
     font-weight: 700;
     font-style: normal;
-    font-display: block;
+    font-display: swap;
   }
   /* Italic → Bold Italic (700 italic) */
   @font-face {
@@ -37,9 +37,10 @@
          url('/assets/fonts/LXGWBright-Italic.woff') format('woff');
     font-weight: 700;
     font-style: italic;
-    font-display: block;
+    font-display: swap;
   }
-  html { font-family: "LXGWBright", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+  html { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+  html.fonts-loaded { font-family: "LXGWBright", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
 }
 
 @layer utilities {

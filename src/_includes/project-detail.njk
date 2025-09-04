@@ -1,38 +1,60 @@
-{% extends "layout.njk" %}
-{% set activeNav = 'projects' %}
-{% block content %}
+---
+layout: layout.njk
+activeNav: projects
+---
 <article class="max-w-3xl mx-auto p-4">
+  {% set cfg = page.inputPath | readJsonRel('index.json') %}
+  {% set title = title or cfg.title %}
+  {% set banner = banner or cfg.banner %}
+  {% set team = team or cfg.team %}
+  {% set zh_title = (cfg.cn_title or '') | trim %}
+  {% set en_title = (cfg.en_title or '') | trim %}
+  {% set zh_team = (cfg.cn_team or '') | trim %}
+  {% set en_team = (cfg.en_team or '') | trim %}
+  {% set screenshots = screenshots or cfg.screenshots %}
+  {% if zh_title or en_title %}
+  <meta data-locale-title="cn" content="{{ zh_title }}">
+  <meta data-locale-title="en" content="{{ en_title }}">
+  {% endif %}
   <header class="mb-6">
     {% if banner %}
     <img src="{{ (page.url | url) }}{{ banner | replace('./','') }}" alt="{{ title }}" class="w-full h-56 object-cover rounded-lg" />
     {% endif %}
-    <h1 class="text-2xl font-bold mt-4 text-neutral-900 dark:text-white">{{ title }}</h1>
-    {% if team %}<p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">{{ team }}</p>{% endif %}
+    {% if zh_title and en_title %}
+    <h1 data-locale="cn" class="text-2xl font-bold mt-4 text-neutral-900 dark:text-white" style="display:none">{{ zh_title }}</h1>
+    <h1 data-locale="en" class="text-2xl font-bold mt-4 text-neutral-900 dark:text-white" style="display:none">{{ en_title }}</h1>
+    {% else %}
+    <h1 class="text-2xl font-bold mt-4 text-neutral-900 dark:text-white">{{ zh_title or en_title or title }}</h1>
+    {% endif %}
+    {% set any_team = zh_team or en_team or team %}
+    {% if any_team %}
+      {% if zh_team and en_team %}
+      <p data-locale="cn" class="text-sm text-neutral-600 dark:text-neutral-300 mt-1" style="display:none">{{ zh_team }}</p>
+      <p data-locale="en" class="text-sm text-neutral-600 dark:text-neutral-300 mt-1" style="display:none">{{ en_team }}</p>
+      {% else %}
+      <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">{{ zh_team or en_team or team }}</p>
+      {% endif %}
+    {% endif %}
   </header>
-  {% set zh_md_path = cn_md_file_location or cn_md %}
-  {% set en_md_path = en_md_file_location or en_md %}
-  {% if zh_md_path or en_md_path %}
-  {% set zh_md = '' %}
-  {% if zh_md_path %}{% set zh_md = zh_md_path | read %}{% endif %}
-  {% set en_md = '' %}
-  {% if en_md_path %}{% set en_md = en_md_path | read %}{% endif %}
-  <div class="md-content">
-    <article data-locale="cn" style="display:none">{{ zh_md | markdown | safe }}</article>
-    <article data-locale="en" style="display:none">{{ en_md | markdown | safe }}</article>
-  </div>
-  <script>
-    (function(){
-      try {
-        var locale = localStorage.getItem('locale') || 'cn';
-        if (locale === 'zh') locale = 'cn';
-        document.querySelectorAll('article[data-locale]').forEach(function(a){
-          a.style.display = (a.getAttribute('data-locale') === locale ? '' : 'none');
-        });
-      } catch (e) {}
-    })();
-  </script>
+  {% set zh_md_path = cfg.cn_markdown %}
+  {% set en_md_path = cfg.en_markdown %}
+  {% set zh_md_raw = (zh_md_path and (page.inputPath | readRel(zh_md_path))) or '' %}
+  {% set en_md_raw = (en_md_path and (page.inputPath | readRel(en_md_path))) or '' %}
+  {% set has_zh = (zh_md_raw | trim) %}
+  {% set has_en = (en_md_raw | trim) %}
+  {% if not has_zh and not has_en %}
+  <article class="md-content">
+    <p data-i18n="projects.missing">No Markdown configured. Please set cn_markdown or en_markdown in index.json.</p>
+  </article>
+  {% elif has_zh and not has_en %}
+  <article class="md-content">{{ zh_md_raw | stripMdTitle | markdown | safe }}</article>
+  {% elif has_en and not has_zh %}
+  <article class="md-content">{{ en_md_raw | stripMdTitle | markdown | safe }}</article>
   {% else %}
-  <div class="md-content">{{ content | markdown | safe }}</div>
+  <div>
+    <article data-locale="cn" class="md-content" style="display:none">{{ zh_md_raw | stripMdTitle | markdown | safe }}</article>
+    <article data-locale="en" class="md-content" style="display:none">{{ en_md_raw | stripMdTitle | markdown | safe }}</article>
+  </div>
   {% endif %}
   {% if screenshots %}
   <section class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -41,6 +63,16 @@
     {% endfor %}
   </section>
   {% endif %}
-</article>
-{% endblock %}
+  <script>
+    (function(){
+      try {
+        var locale = localStorage.getItem('locale') || 'cn';
+        if (locale === 'zh') locale = 'cn';
+        document.querySelectorAll('[data-locale]').forEach(function(el){
+          el.style.display = (el.getAttribute('data-locale') === locale ? '' : 'none');
+        });
+      } catch (e) {}
+    })();
+  </script>
+ </article>
 
