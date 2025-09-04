@@ -3,5 +3,11 @@ layout: layout.njk
 title: 首页
 ---
 
-<h1>{{ site.title }}</h1>
-<p>{{ site.description }}</p>
+<h1 class="text-xl font-bold mb-4">{{ site.title }}</h1>
+<p class="text-neutral-300 mb-6">{{ site.description }}</p>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  {% for project in collections.projects %}
+    {% include "card.njk" %}
+  {% endfor %}
+</div>
