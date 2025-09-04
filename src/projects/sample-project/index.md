@@ -1,12 +1,13 @@
 ---
-title: "Sample Project"
-banner: "./banner.png"
-team: "Team Alpha"
-tags: ["Demo"]
-date: 2025-01-01
+title: "Right Click to Activate Translator"
+banner: "./banner.jpg"
+team: "Octocat Ecology and Behaviour Experimental Research Institute"
+tags: ["PC", "Puzzle Game", "Conlang"]
+date: 2024-08
 layout: "project-detail.njk"
 screenshots:
   - "./screenshots/1.png"
 ---
-这是一个示例项目，用于展示 Eleventy 集合与模板渲染。
+# Right Click to Activate Translator
+
 
