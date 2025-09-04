@@ -1,15 +1,16 @@
 ---
 layout: layout.njk
-title: 首页
+title: 
+activeNav: home
 ---
 
-<section class="relative h-screen w-full overflow-hidden">
+<section class="relative h-screen w-full overflow-hidden bg-white dark:bg-transparent">
   <div class="absolute inset-0 hero-bg" style="{% if site.heroImage %}background-image:url('{{ site.heroImage | url }}'){% endif %}"></div>
-  <div class="absolute inset-0 bg-gradient-to-b from-neutral-950/20 via-neutral-950/40 to-neutral-950"></div>
-  <div class="relative h-full flex flex-col items-center justify-center text-center px-6">
-    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-white drop-shadow-sm">{{ site.title }}</h1>
-    <p class="mt-4 max-w-2xl text-neutral-300">{{ site.description }}</p>
-    <a href="{{ '/projects/' | url }}" class="mt-10 inline-flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium border border-white/10 bg-neutral-900/50 hover:bg-neutral-800/60 backdrop-blur-md" data-i18n="hero.cta">
+  <div class="absolute inset-0 hero-overlay"></div>
+  <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-neutral-900 dark:text-white drop-shadow-sm" data-i18n="site.title">Campus Game Projects</h1>
+    <p class="mt-4 max-w-2xl text-neutral-600 dark:text-neutral-300" data-i18n="site.description">一个校园内的游戏项目聚合门户</p>
+    <a href="{{ '/projects/' | url }}" class="mt-10 inline-flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium border border-black/10 dark:border-white/10 bg-white/70 hover:bg-white/80 text-neutral-900 dark:text-neutral-100 dark:bg-neutral-900/50 dark:hover:bg-neutral-800/60 backdrop-blur-md transition-colors" data-i18n="hero.cta">
       View Projects
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M4.5 12a.75.75 0 01.75-.75h12.59l-3.72-3.72a.75.75 0 111.06-1.06l5 5a.75.75 0 010 1.06l-5 5a.75.75 0 11-1.06-1.06l3.72-3.72H5.25A.75.75 0 014.5 12z" clip-rule="evenodd"/></svg>
     </a>

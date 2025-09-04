@@ -1,12 +1,18 @@
 ---
 layout: layout.njk
 title: 关于
+activeNav: about
 ---
 
-<div class="max-w-3xl mx-auto text-neutral-300">
-  <h1 data-i18n="nav.about">About</h1>
-  <p>本项目用于聚合校园内的独立游戏与课程项目，欢迎通过 PR 投稿。</p>
-  <p>技术栈：Eleventy + TailwindCSS。托管于 GitHub Pages。</p>
+<div class="max-w-3xl mx-auto">
+  {% set en_md %}{% include 'about/en.md' %}{% endset %}
+  {% set zh_md %}{% include 'about/cn.md' %}{% endset %}
+  <article data-locale="en" class="md-content" style="display:none">
+    {{ en_md | markdown | safe }}
+  </article>
+  <article data-locale="cn" class="md-content">
+    {{ zh_md | markdown | safe }}
+  </article>
 </div>
 
 

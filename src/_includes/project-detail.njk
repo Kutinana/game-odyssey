@@ -1,16 +1,39 @@
 {% extends "layout.njk" %}
+{% set activeNav = 'projects' %}
 {% block content %}
 <article class="max-w-3xl mx-auto p-4">
   <header class="mb-6">
     {% if banner %}
     <img src="{{ (page.url | url) }}{{ banner | replace('./','') }}" alt="{{ title }}" class="w-full h-56 object-cover rounded-lg" />
     {% endif %}
-    <h1 class="text-2xl font-bold mt-4 text-white">{{ title }}</h1>
-    {% if team %}<p class="text-sm text-neutral-300 mt-1">{{ team }}</p>{% endif %}
+    <h1 class="text-2xl font-bold mt-4 text-neutral-900 dark:text-white">{{ title }}</h1>
+    {% if team %}<p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">{{ team }}</p>{% endif %}
   </header>
-  <div class="prose prose-invert max-w-none">
-    {{ content | safe }}
+  {% set zh_md_path = cn_md_file_location or cn_md %}
+  {% set en_md_path = en_md_file_location or en_md %}
+  {% if zh_md_path or en_md_path %}
+  {% set zh_md = '' %}
+  {% if zh_md_path %}{% set zh_md = zh_md_path | read %}{% endif %}
+  {% set en_md = '' %}
+  {% if en_md_path %}{% set en_md = en_md_path | read %}{% endif %}
+  <div class="md-content">
+    <article data-locale="cn" style="display:none">{{ zh_md | markdown | safe }}</article>
+    <article data-locale="en" style="display:none">{{ en_md | markdown | safe }}</article>
   </div>
+  <script>
+    (function(){
+      try {
+        var locale = localStorage.getItem('locale') || 'cn';
+        if (locale === 'zh') locale = 'cn';
+        document.querySelectorAll('article[data-locale]').forEach(function(a){
+          a.style.display = (a.getAttribute('data-locale') === locale ? '' : 'none');
+        });
+      } catch (e) {}
+    })();
+  </script>
+  {% else %}
+  <div class="md-content">{{ content | markdown | safe }}</div>
+  {% endif %}
   {% if screenshots %}
   <section class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
     {% for shot in screenshots %}

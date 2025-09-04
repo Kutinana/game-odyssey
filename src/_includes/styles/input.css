@@ -2,14 +2,109 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* Light → Normal (400) */
+  @font-face {
+    font-family: "LXGWBright";
+    src: url('/assets/fonts/LXGWBright-Light.woff2') format('woff2'),
+         url('/assets/fonts/LXGWBright-Light.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+  }
+  /* LightItalic → Normal Italic (400 italic) */
+  @font-face {
+    font-family: "LXGWBright";
+    src: url('/assets/fonts/LXGWBright-LightItalic.woff2') format('woff2'),
+         url('/assets/fonts/LXGWBright-LightItalic.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+    font-display: block;
+  }
+  /* Regular → Bold (700) */
+  @font-face {
+    font-family: "LXGWBright";
+    src: url('/assets/fonts/LXGWBright-Regular.woff2') format('woff2'),
+         url('/assets/fonts/LXGWBright-Regular.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: block;
+  }
+  /* Italic → Bold Italic (700 italic) */
+  @font-face {
+    font-family: "LXGWBright";
+    src: url('/assets/fonts/LXGWBright-Italic.woff2') format('woff2'),
+         url('/assets/fonts/LXGWBright-Italic.woff') format('woff');
+    font-weight: 700;
+    font-style: italic;
+    font-display: block;
+  }
+  html { font-family: "LXGWBright", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+}
+
 @layer utilities {
   .hero-bg {
-    background: radial-gradient(1200px 600px at 20% 0%, rgba(99,102,241,0.15), transparent 60%),
-                radial-gradient(1200px 600px at 80% 100%, rgba(168,85,247,0.12), transparent 60%),
-                linear-gradient(180deg, rgba(10,10,12,0.9), rgba(10,10,12,1));
+    background:
+      radial-gradient(1200px 600px at 20% 0%, rgba(99,102,241,0.16), transparent 60%),
+      radial-gradient(1200px 600px at 80% 100%, rgba(168,85,247,0.12), transparent 60%);
     background-size: cover;
     background-position: center;
-    background-image: url('/assets/images/hero-bg.jpg');
     filter: saturate(0.7);
   }
+  .hero-overlay {
+    background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,1));
+  }
+  .dark .hero-overlay {
+    background: linear-gradient(180deg, rgba(10,10,12,0.2), rgba(10,10,12,1));
+  }
+  /* Fade transition container */
+  .swup-fade { transition: opacity 450ms ease; }
+  html.is-animating .swup-fade { opacity: 0; }
+  /* White/black fade mask */
+  html.is-animating.light-mask::before,
+  html.is-animating.dark-mask::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    transition: opacity 500ms ease;
+    opacity: 1;
+    pointer-events: none;
+  }
+  html.is-animating.light-mask::before { background: #fff; }
+  html.is-animating.dark-mask::before { background: #000; }
+  /* Nav indicator (active + hover follows) */
+  .nav-indicator {
+    border: 1px solid rgba(0,0,0,0.12);
+    background: rgba(255,255,255,0.45);
+    transition: left 160ms ease, width 160ms ease, opacity 120ms ease, background 160ms ease, border-color 160ms ease;
+    height: 30px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .dark .nav-indicator {
+    border-color: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.08);
+  }
+  #navTabs a[data-tab] { position: relative; z-index: 1; }
+}
+@layer components {
+  .md-content {
+    @apply text-neutral-700 dark:text-neutral-300;
+  }
+  .md-content h1, .md-content h2, .md-content h3 {
+    @apply font-bold text-neutral-900 dark:text-white tracking-tight;
+  }
+  .md-content h1 { @apply text-3xl mt-8; }
+  .md-content > h1:first-child { @apply mt-2; }
+  .md-content h2 { @apply text-2xl mt-6; }
+  .md-content h3 { @apply text-xl mt-4; }
+  .md-content p { @apply mt-3 leading-7; }
+  .md-content ol { @apply list-decimal ml-6 mt-3 space-y-1; }
+  .md-content ul { @apply list-disc ml-6 mt-3 space-y-1; }
+  .md-content a { @apply underline decoration-neutral-400 underline-offset-4 hover:text-neutral-900 dark:hover:text-white; }
+  .md-content code { @apply px-1.5 py-0.5 rounded bg-neutral-800/10 dark:bg-white/10 text-[0.95em]; }
+  .md-content pre { @apply p-3 rounded bg-neutral-900 text-neutral-100 overflow-x-auto; }
+  .md-content blockquote { @apply border-l-4 border-neutral-300 dark:border-neutral-700 pl-4 italic text-neutral-600 dark:text-neutral-300; }
+  .md-content hr { @apply my-6 border-neutral-200 dark:border-neutral-700; }
 }

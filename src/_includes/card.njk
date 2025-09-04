@@ -1,10 +1,10 @@
-<a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-neutral-800 hover:bg-neutral-700 transition">
+<a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors">
   {% if project.data.banner %}
   <img src="{{ (project.url | url) }}{{ project.data.banner | replace('./','') }}" alt="{{ project.data.title }}" class="w-full h-40 object-cover" />
   {% endif %}
   <div class="p-4">
-    <h3 class="text-base font-semibold text-white">{{ project.data.title }}</h3>
-    <p class="text-sm text-neutral-300 mt-1">{{ project.templateContent | striptags | truncate(100) }}</p>
+    <h3 class="text-base font-semibold">{{ project.data.title }}</h3>
+    <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">{{ project.templateContent | striptags | truncate(100) }}</p>
   </div>
 </a>
 
