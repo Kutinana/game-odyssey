@@ -5,7 +5,7 @@ cn_title: 项目列表 - 香港中文大学（深圳）游戏研究社
 en_title: Project List - CUHK(SZ) Game Odyssey
 ---
 
-<section class="relative h-72 w-full overflow-hidden mb-6 bg-white dark:bg-transparent left-1/2 -translate-x-1/2" style="width:100vw;margin-top:-6rem;">
+<section class="relative h-72 w-full overflow-hidden mb-6 bg-white dark:bg-transparent left-1/2 -translate-x-1/2" style="width:calc(100vw - var(--sbw, 0px));margin-top:-6rem;">
   {% set projHero = site.projectsHeroImage or site.heroImage %}
   {% set projHeroUrl = (projHero or '') | replace('./','/') %}
   <div class="absolute inset-0 hero-bg" style="{% if projHeroUrl %}background-image:url('{{ projHeroUrl | url }}'){% endif %}; background-position: 50% 35%;"></div>

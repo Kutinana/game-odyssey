@@ -1,0 +1,12 @@
+{
+  "en_title": "Space Bar ☆ Porter q(≧▽≦q)",
+  "banner": "./banner.jpg",
+  "en_team": "54*0.7",
+  "tags": ["PC", "Platformer", "Pixel Art", "Ludum Dare 56"],
+  "date": "2023-10",
+  "screenshots": [
+    "./screenshots/1.jpg"
+  ],
+  "cn_markdown": "./contents/cn.md",
+  "en_markdown": "./contents/en.md"
+}

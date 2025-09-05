@@ -13,7 +13,7 @@ activeNav: projects
 {% set en_team = (cfg.en_team or '') | trim %}
 
 {% if banner %}
-<section class="relative h-72 w-full overflow-hidden mb-6 bg-white dark:bg-transparent left-1/2 -translate-x-1/2" style="width:100vw;margin-top:-6rem;">
+<section class="relative h-72 w-full overflow-hidden mb-6 bg-white dark:bg-transparent left-1/2 -translate-x-1/2" style="width:calc(100vw - var(--sbw, 0px));margin-top:-6rem;">
   {% set bannerUrl = ((page.url | url) + (banner | replace('./',''))) %}
   <div class="absolute inset-0 hero-bg" style="background-image:url('{{ bannerUrl }}')"></div>
   <div class="absolute inset-0 hero-overlay"></div>
