@@ -19,6 +19,18 @@
           if (isDark) root.classList.add('dark'); else root.classList.remove('dark');
         } catch (e) {}
       })();
+      // Expose scrollbar width as CSS var (--sbw) to avoid 100vw overflow issues
+      (function(){
+        try {
+          var root = document.documentElement;
+          function setSBW(){
+            var sbw = window.innerWidth - root.clientWidth;
+            root.style.setProperty('--sbw', (sbw > 0 ? sbw : 0) + 'px');
+          }
+          setSBW();
+          window.addEventListener('resize', setSBW, { passive: true });
+        } catch(e) {}
+      })();
       // Apply persisted fonts-loaded flag early to avoid re-swap
       (function(){
         try {
@@ -81,7 +93,29 @@
     <div id="swup" class="swup-fade opacity-0">
       <main class="max-w-6xl mx-auto p-4 pt-24">
         
-<h1 class="text-2xl font-bold mb-6 text-neutral-900 dark:text-white" data-i18n="nav.projects">Projects</h1>
+<section class="relative h-72 w-full overflow-hidden mb-6 bg-white dark:bg-transparent left-1/2 -translate-x-1/2" style="width:100vw;margin-top:-6rem;">
+  
+  
+  <div class="absolute inset-0 hero-bg" style="background-image:url('/assets/images/projects-hero.jpg'); background-position: 50% 35%;"></div>
+  <div class="absolute inset-0 hero-overlay"></div>
+  <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
+    <h1 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white drop-shadow-sm" data-i18n="nav.projects">Projects</h1>
+  </div>
+  <div class="absolute inset-0"></div>
+  <div class="absolute right-2 bottom-2 text-white/80 text-sm"></div>
+  <div class="absolute inset-0"></div>
+  <div class="absolute inset-0"></div>
+</section>
+
+<div class="mb-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+  <div class="flex-1">
+    <input id="projectSearch" type="text" class="w-full px-4 py-2 rounded-lg border border-black/10 dark:border-white/10 bg-white/70 dark:bg-neutral-900/50 text-neutral-900 dark:text-neutral-100 backdrop-blur-md" placeholder="Search projects" data-i18n-placeholder="projects.search.placeholder" />
+  </div>
+  <label class="inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+    <input id="filterRecruiting" type="checkbox" class="rounded border-black/10 dark:border-white/10" />
+    <span data-i18n="projects.filter.recruiting">Recruiting only</span>
+  </label>
+</div>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
   
@@ -91,9 +125,16 @@
 
 
 
-<a href="/projects/rcat/" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors">
+
+
+<a href="/projects/rcat/" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors relative" data-card="1" data-search="按右键启动翻译器 Right Click to Activate Translator 蛸猫生态与行为学实验研究中心 Octocat Ecology and Behaviour Experimental Research Institute PC Puzzle Game Pixel Art Conlang" data-recruit="true">
   
   <img src="/projects/rcat/banner.jpg" alt="按右键启动翻译器" class="w-full h-40 object-cover" />
+  
+  
+  <div class="absolute top-0 left-0 m-2">
+    <span class="inline-block rounded-md px-3 py-1 text-xs font-medium text-white badge-recruit" data-i18n="project.recruiting">招募中</span>
+  </div>
   
   <div class="p-4">
     
@@ -107,6 +148,19 @@
         <p data-locale="en" class="text-sm text-neutral-600 dark:text-neutral-300 mt-1" style="display:none">Octocat Ecology and Behaviour Experimental Research Institute</p>
       
     
+    
+      <div class="mt-2 flex flex-wrap gap-2">
+        
+          <span class="inline-block rounded-full px-3 py-1 text-xs font-medium bg-white/60 dark:bg-neutral-900/50 text-neutral-900 dark:text-white border border-black/10 dark:border-white/10">PC</span>
+        
+          <span class="inline-block rounded-full px-3 py-1 text-xs font-medium bg-white/60 dark:bg-neutral-900/50 text-neutral-900 dark:text-white border border-black/10 dark:border-white/10">Puzzle Game</span>
+        
+          <span class="inline-block rounded-full px-3 py-1 text-xs font-medium bg-white/60 dark:bg-neutral-900/50 text-neutral-900 dark:text-white border border-black/10 dark:border-white/10">Pixel Art</span>
+        
+          <span class="inline-block rounded-full px-3 py-1 text-xs font-medium bg-white/60 dark:bg-neutral-900/50 text-neutral-900 dark:text-white border border-black/10 dark:border-white/10">Conlang</span>
+        
+      </div>
+    
   </div>
 </a>
 
@@ -114,6 +168,39 @@
   
 </div>
 
+
+<script>
+  (function(){
+    var input = document.getElementById('projectSearch');
+    var chk = document.getElementById('filterRecruiting');
+    function normalize(s){ return (s||'').toLowerCase(); }
+    function applyFilter(){
+      var q = normalize(input && input.value);
+      var onlyRec = !!(chk && chk.checked);
+      var cards = document.querySelectorAll('[data-card]');
+      cards.forEach(function(card){
+        var hay = normalize(card.getAttribute('data-search'));
+        var isRec = card.getAttribute('data-recruit') === 'true';
+        var passText = !q || hay.indexOf(q) !== -1;
+        var passRecruit = !onlyRec || isRec;
+        card.style.display = (passText && passRecruit) ? '' : 'none';
+      });
+    }
+    if (input) input.addEventListener('input', applyFilter);
+    if (chk) chk.addEventListener('change', applyFilter);
+    // i18n placeholder sync using layout's dict
+    try {
+      var savedLocale = localStorage.getItem('locale') || 'cn';
+      if (savedLocale === 'zh') savedLocale = 'cn';
+      var dict = { cn: {"site.title":"香港中文大学（深圳）游戏研究社","site.description":"玩耍，创造，分享","nav.home":"首页","nav.projects":"项目","nav.about":"关于","hero.cta":"查看项目","project.recruiting":"招募中","project.screenshots":"截图","project.screenshots.more":"还有更多……","projects.search.placeholder":"搜索项目、团队或标签","projects.filter.recruiting":"只看招募中"}, en: {"site.title":"CUHK(SZ) Gaming Odyssey","site.description":"Play, Create, Share","nav.home":"Home","nav.projects":"Projects","nav.about":"About","hero.cta":"View Projects","project.recruiting":"Recruiting","project.screenshots":"Screenshots","project.screenshots.more":"and more....","projects.search.placeholder":"Search projects, teams or tags","projects.filter.recruiting":"Recruiting only"} };
+      var data = dict[savedLocale] || dict.cn;
+      var phKey = 'projects.search.placeholder';
+      if (input && data && data[phKey]) input.setAttribute('placeholder', data[phKey]);
+      // update label text via data-i18n already handled globally, but run once to refresh indicator width
+      setTimeout(applyFilter, 0);
+    } catch(e) { setTimeout(applyFilter, 0); }
+  })();
+</script>
 
 
       </main>
@@ -139,7 +226,7 @@
         // Do not bind here to avoid double handlers; handled in bindUi()
 
         // Minimal i18n for nav and CTA
-        var dict = { cn: {"site.title":"香港中文大学（深圳）游戏研究社","site.description":"玩耍，创造，分享","nav.home":"首页","nav.projects":"项目","nav.about":"关于","hero.cta":"查看项目"}, en: {"site.title":"CUHK(SZ) Game Odyssey","site.description":"Play, Create, Share","nav.home":"Home","nav.projects":"Projects","nav.about":"About","hero.cta":"View Projects"} };
+        var dict = { cn: {"site.title":"香港中文大学（深圳）游戏研究社","site.description":"玩耍，创造，分享","nav.home":"首页","nav.projects":"项目","nav.about":"关于","hero.cta":"查看项目","project.recruiting":"招募中","project.screenshots":"截图","project.screenshots.more":"还有更多……","projects.search.placeholder":"搜索项目、团队或标签","projects.filter.recruiting":"只看招募中"}, en: {"site.title":"CUHK(SZ) Gaming Odyssey","site.description":"Play, Create, Share","nav.home":"Home","nav.projects":"Projects","nav.about":"About","hero.cta":"View Projects","project.recruiting":"Recruiting","project.screenshots":"Screenshots","project.screenshots.more":"and more....","projects.search.placeholder":"Search projects, teams or tags","projects.filter.recruiting":"Recruiting only"} };
         var rootLocale = (localStorage.getItem('locale') || 'cn');
         if (rootLocale === 'zh') rootLocale = 'cn';
         var langToggle = document.getElementById('langToggle');
