@@ -1254,11 +1254,6 @@ html.fonts-loaded {
   line-height: 1.25rem;
 }
 
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
@@ -1619,8 +1614,8 @@ html.is-animating.dark-mask::before {
   }
 }
 
-/* Reserve vertical scrollbar space to keep layout width consistent across pages */
-html {
+/* Prevent horizontal scrolling site-wide */
+html, body {
+  max-width: 100%;
   overflow-x: hidden;
-  overflow-y: scroll;
 }
