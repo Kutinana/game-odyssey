@@ -105,14 +105,31 @@
 <h1>I want to submit my game!</h1>
 <hr>
 <p>We welcome submissions via Pull Request. Please note that we currently accept only indie games developed by CUHK‑Shenzhen students. For team‑developed projects, please first obtain unanimous consent from all team members. For company‑developed projects, please provide additional information so we can determine whether it is suitable to display on this site.</p>
+<h2>Submission steps</h2>
 <p>When you wish to submit, please follow these steps:</p>
 <ol>
 <li>Fork this repository</li>
 <li>Create your project folder under <code>src/projects/</code> and add <code>index.json</code></li>
 <li>Add assets such as a <code>banner</code> and <code>screenshots</code>, and ensure they are properly configured in <code>index.json</code></li>
-<li>Open a Pull Request, state your name and student ID in the description, and wait for it to be merged</li>
+<li>Commit your project folder, open a Pull Request, state your name and student ID in the description, and wait for it to be merged</li>
 </ol>
-<p>If you are not familiar with this process, you may directly use your university email to send the relevant information about your game to the email address below. We will update it as soon as possible after approval.</p>
+<h2>Project folder structure</h2>
+<p>A project folder should include at minimum:</p>
+<ul>
+<li><code>index.njk</code>: fixed template; you may copy it from any existing project</li>
+<li><code>index.json</code>: metadata file storing your project’s basic information and guiding how the system should read it</li>
+</ul>
+<p>After configuring these two files, we recommend adding:</p>
+<ul>
+<li><code>banner</code>: project header image</li>
+<li><code>content.md</code>: to display more than just the title and team name on the detail page, include at least one Markdown file and configure its path correctly in <code>index.json</code></li>
+<li><code>screenshots/</code>: gameplay screenshots</li>
+</ul>
+<h2>Other</h2>
+<p>In principle, as long as things are configured correctly, the system can recognize your resources regardless of naming or paths. However, we still encourage a tidy and standardized folder structure. You can refer to existing projects. If you need help, feel free to contact us via the email below.</p>
+<p>Please do not modify other people’s projects or submit such changes; otherwise, we will reject the PR. When you need to update your own project’s information, it is best to use the same GitHub account as your initial submission. Otherwise, you may be asked to provide proof that you have the right to make changes to the project.</p>
+<p>If you are not familiar with the submission process, you may directly use your <strong>university email</strong> to send the relevant information about your game to the email address below. We will update it as soon as possible after approval.</p>
+<p>Please ensure that your submission complies with laws, regulations, and relevant policies, and that its content is suitable for public display. The CUHK‑Shenzhen Gaming Odyssey reserves the right to modify or remove any submitted project.</p>
 <h1>Contact</h1>
 <hr>
 <p>For any questions or suggestions, feel free to contact us via email: st_gamingodyssey [at] <a href="http://link.cuhk.edu.cn">link.cuhk.edu.cn</a></p>
@@ -127,14 +144,31 @@
 <h1>我想投稿我开发的游戏！</h1>
 <hr>
 <p>欢迎通过 Pull Request 的方式投稿你的游戏项目。但请注意，我们现在仅接受由香港中文大学（深圳）的同学开发的独立游戏。如果是团队开发的项目，请先取得团队中成员的一致同意。如果是企业开发的项目，请提供更多相关信息供我们判断是否适合展示于本站。</p>
+<h2>投稿步骤</h2>
 <p>当您希望投稿时，请按照以下步骤：</p>
 <ol>
 <li>Fork 本仓库</li>
 <li>在 <code>src/projects/</code> 下新建你的项目文件夹，并添加 <code>index.json</code></li>
 <li>为你的项目添加 <code>banner</code> 与 <code>screenshots</code> 等资源，并确保它们被正确配置在 <code>index.json</code> 中</li>
-<li>提交 Pull Request，在 Description 中标明自己的身份与学号，等待合并</li>
+<li>Commit 你的项目文件夹，发起 Pull Request，在 Description 中标明自己的身份与学号，等待合并</li>
 </ol>
-<p>若您对这一过程不太熟悉，您可直接 <strong>使用学校邮箱</strong> 将希望投稿的游戏的相关信息发送至下方的邮箱中。我们在审核通过后会尽快更新。</p>
+<h2>项目文件夹格式</h2>
+<p>一个项目文件夹应当至少包含以下内容：</p>
+<ul>
+<li><code>index.njk</code>: 固定，可从任何一个项目复制而来</li>
+<li><code>index.json</code>: 元文件，存储了项目的基本信息，指导系统应当如何读取你的项目</li>
+</ul>
+<p>在配置好这两个文件后，我们建议您添加以下内容，使项目更为美观：</p>
+<ul>
+<li><code>banner</code>: 项目头图</li>
+<li><code>content.md</code>: 为使您的项目详情页显示除了标题与团队名的其他内容，您应至少确保有一个 Markdown 文件，并将它的路径正确配置在 <code>index.json</code> 中</li>
+<li><code>screenshots/</code>: 游戏截图</li>
+</ul>
+<h2>其他</h2>
+<p>理论上，只要配置得当，无论资源文件的命名、路径如何，系统都能正确识别。但我们仍然鼓励规范构建您的项目文件夹。您可参考已有的项目构建您的项目文件夹。若需要帮助，您也可随时使用下方的邮箱联系我们。</p>
+<p>请您在更改时不要修改他人的项目，更不要提交这一修改，否则我们会拒绝 PR。在您需要更新您的项目信息时，请最好使用与首次提交相同的 Github 账号。否则您可能需要提供相应的资料来证明您具备对这一项目的更改权力。</p>
+<p>若您对这一过程不够熟悉，您也可直接 <strong>使用学校邮箱</strong> 将希望投稿的游戏的相关资料发送至下方的邮箱中。我们在审核通过后会尽快更新。</p>
+<p>请您确保提交的项目符合法律法规与相关条例规定，内容适宜公开展示。香港中文大学（深圳）游戏研究社保留对所有已提交项目的更改、删除权力。</p>
 <h1>联系</h1>
 <hr>
 <p>如有任何疑问、建议，欢迎通过邮箱联系我们：st_gamingodyssey [at] <a href="http://link.cuhk.edu.cn">link.cuhk.edu.cn</a></p>
