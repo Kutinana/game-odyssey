@@ -41,6 +41,8 @@
   }
   html { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
   html.fonts-loaded { font-family: "LXGWBright", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+  /* Prevent horizontal scrollbar globally */
+  html, body { overflow-x: hidden; }
 }
 
 @layer utilities {

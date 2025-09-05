@@ -1,47 +1,48 @@
-# Game Odyssey (Eleventy + Tailwind)
-
-Minimal Eleventy-based game project aggregation portal.
-
-See `_documents/architecture.md` and `_documents/task.md` for architecture and roadmap.
+# Gaming Odyssey Official Site
 
 ## Development
 - Node.js LTS required
 - After setup: `npm start` to serve locally
 
-## How to add a project (投稿教程)
-1. Fork 本仓库并创建分支（例如 `feat/my-game`）。
-2. 在 `src/projects/{your-slug}/` 下新建目录，例如：`src/projects/my-puzzle-game/`。
-3. 在该目录创建 `index.md`，并填写以下示例 front matter（YAML）与简介：
+## Tutorial for submission
+1. Fork this repo and create a branch.
+2. Make new directory under `src/projects/` with your slug, e.g.: `src/projects/my-game/`.
+3. Create (or copy) `index.json`, using the following format:
 
-```yaml
----
-title: "My Puzzle Game"
-banner: "./banner.png"
-team: "Team Alpha"
-tags: ["Puzzle", "2D"]
-date: 2025-08-01
-screenshots:
-  - "./screenshots/1.png"
----
-这里是项目简介（支持 Markdown）。
+```json
+{
+  "en_title": "English title of your game",
+  "cn_title": "您游戏的中文名",
+  "banner": "./banner.webp",
+  "en_team": "Your team's english name",
+  "cn_team": "中文团队名",
+  "tags": ["sample tag"],
+  "date": "YYYY-MM-DD",
+  "is_recruit": true,
+  "screenshots": [
+    "./screenshots/1.webp",
+    "./screenshots/2.webp"
+  ],
+  "cn_markdown": "./contents/cn.md",
+  "en_markdown": "./contents/en.md"
+}
 ```
 
-4. 放置资源文件：
-   - `banner.png`
-   - `screenshots/1.png`（可多张）
+4. Put assets correspondingly:
+   - `banner.webp`
+   - `screenshots/`
+   - `contents/`
 
-5. 本地预览（可选）：
-   - 运行：`npx @11ty/eleventy --serve`
-   - 打开浏览器访问：`http://localhost:8080/`
+5. Preview in local (Optional):
+   - To run the project: `npm start`
+   - Visit `http://localhost:8080/` for your preview.
 
-6. 提交 PR：
+6. Submit Pull Request：
    - `git add -A && git commit -m "feat: add my game" && git push`
-   - 在 GitHub 发起 Pull Request，等待审核合并
+   - Start a Pull Request in Github, and wait for our verification.
 
 Tips：
-- `{your-slug}` 建议使用全小写与短横线，例如 `my-puzzle-game`。
-- 资源路径请使用相对路径（以 `./` 开头）。
-- 请不要提交 `_site/` 与 `node_modules/`（已在 `.gitignore`）。
-
-## License
-MIT
+- It's better to use hyphen and lower letters in `{your-slug}`.
+- Use relative path for assets (start with `./`).
+- Only submit your folder as changes.
+- We encourage you to use `.webp` images instead of `.png`.
