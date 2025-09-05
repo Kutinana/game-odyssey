@@ -5,6 +5,18 @@ cn_title: 关于 - 香港中文大学（深圳）游戏研究社
 en_title: About - CUHK(SZ) Game Odyssey
 ---
 
+<section class="relative h-72 w-full overflow-hidden mb-6 bg-white dark:bg-transparent left-1/2 -translate-x-1/2" style="width:calc(100vw - var(--sbw, 0px));margin-top:-6rem;">
+  {% set aboutHero = site.aboutHeroImage or site.heroImage %}
+  {% set aboutHeroUrl = (aboutHero or '') | replace('./','/') %}
+  <div class="absolute inset-0 hero-bg" style="{% if aboutHeroUrl %}background-image:url('{{ aboutHeroUrl | url }}'){% endif %}; background-position: 50% 35%;"></div>
+  <div class="absolute inset-0 hero-overlay"></div>
+  <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
+    <h1 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white drop-shadow-sm" data-i18n="nav.about">About</h1>
+  </div>
+  <div class="absolute inset-0"></div>
+  <div class="absolute inset-0"></div>
+</section>
+
 <div class="max-w-3xl mx-auto">
   {% set en_md %}{% include 'about/en.md' %}{% endset %}
   {% set zh_md %}{% include 'about/cn.md' %}{% endset %}

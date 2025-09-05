@@ -1,5 +1,6 @@
 {
   "lang": "zh-CN",
   "heroImage": "./assets/images/hero.webp",
-  "projectsHeroImage": "./assets/images/projects-hero.webp"
+  "projectsHeroImage": "./assets/images/hero.webp",
+  "aboutHeroImage": "./assets/images/hero.webp"
 }

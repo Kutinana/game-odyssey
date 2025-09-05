@@ -1,5 +1,3 @@
-# About
----
 
 Hi, welcome to the Gaming Odyssey at The Chinese University of Hong Kong, Shenzhen!
 
@@ -17,7 +15,7 @@ We welcome submissions via Pull Request. Please note that we currently accept on
 
 When you wish to submit, please follow these steps:
 
-1. Fork this repository
+1. Fork [this repository](https://github.com/Kutinana/game-odyssey)
 2. Create your project folder under `src/projects/` and add `index.json`
 3. Add assets such as a `banner` and `screenshots`, and ensure they are properly configured in `index.json`
 4. Commit your project folder, open a Pull Request, state your name and student ID in the description, and wait for it to be merged

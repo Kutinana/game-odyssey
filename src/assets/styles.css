@@ -816,6 +816,87 @@ html, body {
   color: #ffffff;
 }
 
+/* Checkbox: matches site's soft glassy UI (light/dark aware) */
+
+.ui-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.7);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), inset 0 0 0 1px rgba(255,255,255,0.5);
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease, transform 80ms ease;
+}
+
+.dark .ui-checkbox {
+  border-color: rgba(255,255,255,0.2);
+  background: rgba(24,24,27,0.6);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.ui-checkbox:hover {
+  border-color: rgba(0,0,0,0.25);
+}
+
+.dark .ui-checkbox:hover {
+  border-color: rgba(255,255,255,0.35);
+}
+
+.ui-checkbox:active {
+  transform: scale(0.96);
+}
+
+/* Remove default focus outline; show custom ring only for keyboard focus */
+
+.ui-checkbox:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.dark .ui-checkbox:focus {
+  box-shadow: none;
+}
+
+.ui-checkbox:focus-visible {
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.25);
+}
+
+.dark .ui-checkbox:focus-visible {
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.35);
+}
+
+/* Checkmark */
+
+.ui-checkbox::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 4px;
+  background: #6366f1;
+  /* indigo-500 */
+  transition: transform 140ms ease;
+}
+
+.dark .ui-checkbox::after {
+  background: #818cf8;
+  /* indigo-400 */
+}
+
+.ui-checkbox:checked::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
 .fixed {
   position: fixed;
 }
@@ -1058,6 +1139,12 @@ html, body {
 
 .cursor-zoom-in {
   cursor: zoom-in;
+}
+
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .resize {
