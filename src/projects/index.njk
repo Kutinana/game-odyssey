@@ -5,7 +5,29 @@ cn_title: 项目列表 - 香港中文大学（深圳）游戏研究社
 en_title: Project List - CUHK(SZ) Game Odyssey
 ---
 
-<h1 class="text-2xl font-bold mb-6 text-neutral-900 dark:text-white" data-i18n="nav.projects">Projects</h1>
+<section class="relative h-72 w-full overflow-hidden mb-6 bg-white dark:bg-transparent left-1/2 -translate-x-1/2" style="width:100vw;margin-top:-6rem;">
+  {% set projHero = site.projectsHeroImage or site.heroImage %}
+  {% set projHeroUrl = (projHero or '') | replace('./','/') %}
+  <div class="absolute inset-0 hero-bg" style="{% if projHeroUrl %}background-image:url('{{ projHeroUrl | url }}'){% endif %}; background-position: 50% 35%;"></div>
+  <div class="absolute inset-0 hero-overlay"></div>
+  <div class="relative z-10 h-full flex items-center justify-center text-center px-6">
+    <h1 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white drop-shadow-sm" data-i18n="nav.projects">Projects</h1>
+  </div>
+  <div class="absolute inset-0"></div>
+  <div class="absolute right-2 bottom-2 text-white/80 text-sm"></div>
+  <div class="absolute inset-0"></div>
+  <div class="absolute inset-0"></div>
+</section>
+
+<div class="mb-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+  <div class="flex-1">
+    <input id="projectSearch" type="text" class="w-full px-4 py-2 rounded-lg border border-black/10 dark:border-white/10 bg-white/70 dark:bg-neutral-900/50 text-neutral-900 dark:text-neutral-100 backdrop-blur-md" placeholder="Search projects" data-i18n-placeholder="projects.search.placeholder" />
+  </div>
+  <label class="inline-flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-300">
+    <input id="filterRecruiting" type="checkbox" class="rounded border-black/10 dark:border-white/10" />
+    <span data-i18n="projects.filter.recruiting">Recruiting only</span>
+  </label>
+</div>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
   {% for project in collections.projects %}
@@ -14,4 +36,37 @@ en_title: Project List - CUHK(SZ) Game Odyssey
   {% endfor %}
 </div>
 
+
+<script>
+  (function(){
+    var input = document.getElementById('projectSearch');
+    var chk = document.getElementById('filterRecruiting');
+    function normalize(s){ return (s||'').toLowerCase(); }
+    function applyFilter(){
+      var q = normalize(input && input.value);
+      var onlyRec = !!(chk && chk.checked);
+      var cards = document.querySelectorAll('[data-card]');
+      cards.forEach(function(card){
+        var hay = normalize(card.getAttribute('data-search'));
+        var isRec = card.getAttribute('data-recruit') === 'true';
+        var passText = !q || hay.indexOf(q) !== -1;
+        var passRecruit = !onlyRec || isRec;
+        card.style.display = (passText && passRecruit) ? '' : 'none';
+      });
+    }
+    if (input) input.addEventListener('input', applyFilter);
+    if (chk) chk.addEventListener('change', applyFilter);
+    // i18n placeholder sync using layout's dict
+    try {
+      var savedLocale = localStorage.getItem('locale') || 'cn';
+      if (savedLocale === 'zh') savedLocale = 'cn';
+      var dict = { cn: {{ cn | json | safe }}, en: {{ en | json | safe }} };
+      var data = dict[savedLocale] || dict.cn;
+      var phKey = 'projects.search.placeholder';
+      if (input && data && data[phKey]) input.setAttribute('placeholder', data[phKey]);
+      // update label text via data-i18n already handled globally, but run once to refresh indicator width
+      setTimeout(applyFilter, 0);
+    } catch(e) { setTimeout(applyFilter, 0); }
+  })();
+</script>
 

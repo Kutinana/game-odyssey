@@ -1,9 +1,9 @@
 # About
 ---
 
-Hi, welcome to the Game Research Society at The Chinese University of Hong Kong, Shenzhen!
+Hi, welcome to the Gaming Odyssey at The Chinese University of Hong Kong, Shenzhen!
 
-This is the official website of the Game Research Society, aggregating game projects developed by students of The Chinese University of Hong Kong, Shenzhen.
+This is the official website of the Gaming Odyssey, aggregating game projects developed by students of The Chinese University of Hong Kong, Shenzhen.
 
 This site aims to provide CUHK‑Shenzhen students with a platform to showcase their game projects and find teams. Here, you can discover various student‑created indie games, get demo builds, or contact the developers. We encourage teams to include contact information and recruitment needs in their project pages so that students interested in game development can proactively reach out.
 

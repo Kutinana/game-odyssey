@@ -19,6 +19,18 @@
           if (isDark) root.classList.add('dark'); else root.classList.remove('dark');
         } catch (e) {}
       })();
+      // Expose scrollbar width as CSS var (--sbw) to avoid 100vw overflow issues
+      (function(){
+        try {
+          var root = document.documentElement;
+          function setSBW(){
+            var sbw = window.innerWidth - root.clientWidth;
+            root.style.setProperty('--sbw', (sbw > 0 ? sbw : 0) + 'px');
+          }
+          setSBW();
+          window.addEventListener('resize', setSBW, { passive: true });
+        } catch(e) {}
+      })();
       // Apply persisted fonts-loaded flag early to avoid re-swap
       (function(){
         try {

@@ -108,4 +108,8 @@
   .md-content pre { @apply p-3 rounded bg-neutral-900 text-neutral-100 overflow-x-auto; }
   .md-content blockquote { @apply border-l-4 border-neutral-300 dark:border-neutral-700 pl-4 italic text-neutral-600 dark:text-neutral-300; }
   .md-content hr { @apply my-6 border-neutral-200 dark:border-neutral-700; }
+
+  /* Recruiting badge (opaque orange, white text; dark variant uses amber for contrast) */
+  .badge-recruit { background-color: #f97316; color: #ffffff; }
+  .dark .badge-recruit { background-color: #f59e0b; color: #ffffff; }
 }

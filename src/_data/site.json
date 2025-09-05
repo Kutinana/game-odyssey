@@ -1,4 +1,5 @@
 {
   "lang": "zh-CN",
-  "heroImage": "./assets/images/hero.jpg"
+  "heroImage": "./assets/images/hero.jpg",
+  "projectsHeroImage": "./assets/images/projects-hero.jpg"
 }

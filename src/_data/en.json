@@ -1,9 +1,14 @@
 {
-  "site.title": "CUHK(SZ) Game Odyssey",
+  "site.title": "CUHK(SZ) Gaming Odyssey",
   "site.description": "Play, Create, Share",
   "nav.home": "Home",
   "nav.projects": "Projects",
   "nav.about": "About",
-  "hero.cta": "View Projects"
+  "hero.cta": "View Projects",
+  "project.recruiting": "Recruiting",
+  "project.screenshots": "Screenshots",
+  "project.screenshots.more": "and more....",
+  "projects.search.placeholder": "Search projects, teams or tags",
+  "projects.filter.recruiting": "Recruiting only"
 }
 

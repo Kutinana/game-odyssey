@@ -4,8 +4,9 @@
   "banner": "./banner.jpg",
   "en_team": "Octocat Ecology and Behaviour Experimental Research Institute",
   "cn_team": "蛸猫生态与行为学实验研究中心",
-  "tags": ["PC", "Puzzle Game", "Conlang"],
+  "tags": ["PC", "Puzzle Game", "Pixel Art", "Conlang"],
   "date": "2024-08",
+  "is_recruit": true,
   "screenshots": [
     "./screenshots/1.jpg",
     "./screenshots/2.jpg",

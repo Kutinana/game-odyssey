@@ -4,6 +4,11 @@
   "nav.home": "首页",
   "nav.projects": "项目",
   "nav.about": "关于",
-  "hero.cta": "查看项目"
+  "hero.cta": "查看项目",
+  "project.recruiting": "招募中",
+  "project.screenshots": "截图",
+  "project.screenshots.more": "还有更多……",
+  "projects.search.placeholder": "搜索项目、团队或标签",
+  "projects.filter.recruiting": "只看招募中"
 }
 

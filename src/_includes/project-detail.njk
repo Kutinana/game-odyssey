@@ -2,6 +2,45 @@
 layout: layout.njk
 activeNav: projects
 ---
+
+{% set cfg = page.inputPath | readJsonRel('index.json') %}
+{% set title = title or cfg.title %}
+{% set banner = banner or cfg.banner %}
+{% set team = team or cfg.team %}
+{% set zh_title = (cfg.cn_title or '') | trim %}
+{% set en_title = (cfg.en_title or '') | trim %}
+{% set zh_team = (cfg.cn_team or '') | trim %}
+{% set en_team = (cfg.en_team or '') | trim %}
+
+{% if banner %}
+<section class="relative h-72 w-full overflow-hidden mb-6 bg-white dark:bg-transparent left-1/2 -translate-x-1/2" style="width:100vw;margin-top:-6rem;">
+  {% set bannerUrl = ((page.url | url) + (banner | replace('./',''))) %}
+  <div class="absolute inset-0 hero-bg" style="background-image:url('{{ bannerUrl }}')"></div>
+  <div class="absolute inset-0 hero-overlay"></div>
+  <div class="relative z-10 h-full flex items-center justify-center text-center">
+    {% if zh_title and en_title %}
+    <div>
+      <h1 data-locale="cn" class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white drop-shadow-sm" style="display:none">{{ zh_title }}</h1>
+      <h1 data-locale="en" class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white drop-shadow-sm" style="display:none">{{ en_title }}</h1>
+      {% set any_team = zh_team or en_team or team %}
+      {% if any_team %}
+      <p data-locale="cn" class="mt-2 text-base sm:text-lg text-neutral-900 dark:text-neutral-100 drop-shadow-sm" style="display:none">{{ zh_team }}</p>
+      <p data-locale="en" class="mt-2 text-base sm:text-lg text-neutral-900 dark:text-neutral-100 drop-shadow-sm" style="display:none">{{ en_team }}</p>
+      {% endif %}
+    </div>
+    {% else %}
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white drop-shadow-sm">{{ zh_title or en_title or title }}</h1>
+      {% set any_team2 = zh_team or en_team or team %}
+      {% if any_team2 %}
+      <p class="mt-2 text-base sm:text-lg text-neutral-900 dark:text-neutral-100 drop-shadow-sm">{{ zh_team or en_team or team }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endif %}
+
 <article class="max-w-3xl mx-auto p-4">
   {% set cfg = page.inputPath | readJsonRel('index.json') %}
   {% set title = title or cfg.title %}
@@ -16,26 +55,7 @@ activeNav: projects
   <meta data-locale-title="cn" content="{{ zh_title }}">
   <meta data-locale-title="en" content="{{ en_title }}">
   {% endif %}
-  <header class="mb-6">
-    {% if banner %}
-    <img src="{{ (page.url | url) }}{{ banner | replace('./','') }}" alt="{{ title }}" class="w-full h-56 object-cover rounded-lg" />
-    {% endif %}
-    {% if zh_title and en_title %}
-    <h1 data-locale="cn" class="text-2xl font-bold mt-4 text-neutral-900 dark:text-white" style="display:none">{{ zh_title }}</h1>
-    <h1 data-locale="en" class="text-2xl font-bold mt-4 text-neutral-900 dark:text-white" style="display:none">{{ en_title }}</h1>
-    {% else %}
-    <h1 class="text-2xl font-bold mt-4 text-neutral-900 dark:text-white">{{ zh_title or en_title or title }}</h1>
-    {% endif %}
-    {% set any_team = zh_team or en_team or team %}
-    {% if any_team %}
-      {% if zh_team and en_team %}
-      <p data-locale="cn" class="text-sm text-neutral-600 dark:text-neutral-300 mt-1" style="display:none">{{ zh_team }}</p>
-      <p data-locale="en" class="text-sm text-neutral-600 dark:text-neutral-300 mt-1" style="display:none">{{ en_team }}</p>
-      {% else %}
-      <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">{{ zh_team or en_team or team }}</p>
-      {% endif %}
-    {% endif %}
-  </header>
+  
   {% set zh_md_path = cfg.cn_markdown %}
   {% set en_md_path = cfg.en_markdown %}
   {% set zh_md_raw = (zh_md_path and (page.inputPath | readRel(zh_md_path))) or '' %}
@@ -57,10 +77,30 @@ activeNav: projects
   </div>
   {% endif %}
   {% if screenshots %}
-  <section class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-    {% for shot in screenshots %}
-      <img src="{{ (page.url | url) }}{{ shot | replace('./','') }}" alt="screenshot {{ loop.index }}" class="w-full rounded-md" />
-    {% endfor %}
+  <section class="mt-8">
+    <div class="md-content mb-3">
+      <h1>
+        <span data-locale="cn" style="display:none">{{ cn['project.screenshots'] }}</span>
+        <span data-locale="en" style="display:none">{{ en['project.screenshots'] }}</span>
+      </h1>
+      <hr />
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {% for shot in screenshots %}
+        {% if loop.index0 < 3 %}
+          <img src="{{ (page.url | url) }}{{ shot | replace('./','') }}" alt="screenshot {{ loop.index }}" class="w-full rounded-md cursor-zoom-in js-shot" data-index="{{ loop.index0 }}" />
+        {% endif %}
+      {% endfor %}
+      {% if (screenshots | length) > 3 %}
+      <div class="relative rounded-md overflow-hidden cursor-pointer js-shot" data-index="3">
+        <img src="{{ (page.url | url) }}{{ (screenshots[3]) | replace('./','') }}" alt="more screenshots" class="w-full blur-sm brightness-75" />
+        <div class="absolute inset-0 flex items-center justify-center">
+          <span class="text-white text-sm sm:text-base font-medium bg-black/50 px-3 py-1 rounded" data-locale="en" style="display:none">{{ en['project.screenshots.more'] }}</span>
+          <span class="text-white text-sm sm:text-base font-medium bg-black/50 px-3 py-1 rounded" data-locale="cn" style="display:none">{{ cn['project.screenshots.more'] }}</span>
+        </div>
+      </div>
+      {% endif %}
+    </div>
   </section>
   {% endif %}
   <script>
@@ -72,6 +112,94 @@ activeNav: projects
           el.style.display = (el.getAttribute('data-locale') === locale ? '' : 'none');
         });
       } catch (e) {}
+
+      // Lightbox implementation
+      try {
+        var shots = [
+          {% for shot in screenshots %}
+            "{{ (page.url | url) }}{{ shot | replace('./','') }}"{% if not loop.last %},{% endif %}
+          {% endfor %}
+        ];
+
+        if (Array.isArray(shots) && shots.length) {
+          var current = 0;
+
+          // Create lightbox container
+          var lb = document.createElement('div');
+          lb.setAttribute('id', 'lightbox');
+          lb.className = 'fixed inset-0 hidden items-center justify-center z-50';
+
+          lb.innerHTML = ''+
+            '<div data-el="backdrop" class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-200"></div>'+
+            '<div class="relative px-8 pt-4 pb-6">'+
+              '<img data-el="image" alt="screenshot" class="mx-auto w-auto h-auto max-w-[90vw] max-h-[85vh] rounded-md shadow-lg transform scale-95 opacity-0 transition duration-200" />'+
+            '</div>'+
+            '<button type="button" data-el="close" aria-label="Close" class="absolute top-4 right-4 text-white/90 hover:text-white text-2xl leading-none">×</button>'+
+            '<button type="button" data-el="prev" aria-label="Previous" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/60 text-white flex items-center justify-center border border-white/20 shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60">‹</button>'+
+            '<button type="button" data-el="next" aria-label="Next" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/60 text-white flex items-center justify-center border border-white/20 shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white/60">›</button>'+
+            '<div data-el="counter" class="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/85 text-sm"></div>';
+
+          document.body.appendChild(lb);
+
+          var elBackdrop = lb.querySelector('[data-el="backdrop"]');
+          var elImage = lb.querySelector('[data-el="image"]');
+          var elClose = lb.querySelector('[data-el="close"]');
+          var elPrev = lb.querySelector('[data-el="prev"]');
+          var elNext = lb.querySelector('[data-el="next"]');
+          var elCounter = lb.querySelector('[data-el="counter"]');
+
+          function updateCounter(){
+            elCounter.textContent = (current + 1) + ' / ' + shots.length;
+          }
+
+          function show(index){
+            if (index < 0) index = shots.length - 1;
+            if (index >= shots.length) index = 0;
+            current = index;
+            elImage.src = shots[current];
+            updateCounter();
+            lb.classList.remove('hidden');
+            lb.classList.add('flex');
+            requestAnimationFrame(function(){
+              elBackdrop.classList.add('opacity-100');
+              elImage.classList.remove('scale-95','opacity-0');
+              elImage.classList.add('scale-100','opacity-100');
+            });
+          }
+
+          function hide(){
+            elBackdrop.classList.remove('opacity-100');
+            elImage.classList.remove('scale-100','opacity-100');
+            elImage.classList.add('scale-95','opacity-0');
+            setTimeout(function(){
+              lb.classList.remove('flex');
+              lb.classList.add('hidden');
+            }, 180);
+          }
+
+          elClose.addEventListener('click', function(){ hide(); try { this.blur(); } catch(e) {} });
+          elBackdrop.addEventListener('click', hide);
+          elPrev.addEventListener('click', function(){ show(current - 1); try { this.blur(); } catch(e) {} });
+          elNext.addEventListener('click', function(){ show(current + 1); try { this.blur(); } catch(e) {} });
+
+          document.addEventListener('keydown', function(e){
+            if (lb.classList.contains('hidden')) return;
+            if (e.key === 'Escape') hide();
+            else if (e.key === 'ArrowLeft') show(current - 1);
+            else if (e.key === 'ArrowRight') show(current + 1);
+          });
+
+          // Bind thumbnails
+          document.querySelectorAll('.js-shot').forEach(function(node){
+            node.addEventListener('click', function(){
+              var idx = parseInt(node.getAttribute('data-index') || '0', 10) || 0;
+              show(idx);
+            });
+          });
+        }
+      } catch (err) {
+        // noop
+      }
     })();
   </script>
  </article>

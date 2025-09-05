@@ -3,9 +3,16 @@
 {% set en_title = (cfg.en_title or '') | trim %}
 {% set zh_team = (cfg.cn_team or '') | trim %}
 {% set en_team = (cfg.en_team or '') | trim %}
-<a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors">
+{% set tags_list = cfg.tags or [] %}
+{% set tags_text = tags_list | join(' ') %}
+<a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors relative" data-card="1" data-search="{{ (zh_title ~ ' ' ~ en_title ~ ' ' ~ zh_team ~ ' ' ~ en_team ~ ' ' ~ tags_text) | trim }}" data-recruit="{% if cfg.is_recruit %}true{% else %}false{% endif %}">
   {% if cfg.banner %}
   <img src="{{ (project.url | url) }}{{ cfg.banner | replace('./','') }}" alt="{{ zh_title or en_title or cfg.title or project.data.title }}" class="w-full h-40 object-cover" />
+  {% endif %}
+  {% if cfg.is_recruit %}
+  <div class="absolute top-0 left-0 m-2">
+    <span class="inline-block rounded-md px-3 py-1 text-xs font-medium text-white badge-recruit" data-i18n="project.recruiting">招募中</span>
+  </div>
   {% endif %}
   <div class="p-4">
     {% if zh_title and en_title %}
@@ -22,6 +29,13 @@
       {% else %}
         <p class="text-sm text-neutral-600 dark:text-neutral-300 mt-1">{{ zh_team or en_team or cfg.team or project.data.team }}</p>
       {% endif %}
+    {% endif %}
+    {% if tags_list and tags_list.length %}
+      <div class="mt-2 flex flex-wrap gap-2">
+        {% for tag in tags_list %}
+          <span class="inline-block rounded-full px-3 py-1 text-xs font-medium bg-white/60 dark:bg-neutral-900/50 text-neutral-900 dark:text-white border border-black/10 dark:border-white/10">{{ tag }}</span>
+        {% endfor %}
+      </div>
     {% endif %}
   </div>
 </a>
