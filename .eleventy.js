@@ -101,6 +101,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ 'src/sw.js': 'sw.js' });
   // Ensure favicon is available at site root
   eleventyConfig.addPassthroughCopy({ 'src/favicon.ico': 'favicon.ico' });
+  // Prevent GitHub Pages from running Jekyll; serve files as-is
+  eleventyConfig.addPassthroughCopy({ 'src/.nojekyll': '.nojekyll' });
   eleventyConfig.addWatchTarget("src/_includes/styles/input.css");
   // Ensure CNAME is published to the site root (supports keeping CNAME under src/)
   eleventyConfig.addPassthroughCopy({ 'src/CNAME': 'CNAME' });
