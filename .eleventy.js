@@ -99,6 +99,8 @@ module.exports = function(eleventyConfig) {
   // Ensure built CSS and other static assets are published
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy({ 'src/sw.js': 'sw.js' });
+  // Ensure favicon is available at site root
+  eleventyConfig.addPassthroughCopy({ 'src/favicon.ico': 'favicon.ico' });
   eleventyConfig.addWatchTarget("src/_includes/styles/input.css");
   // Ensure CNAME is published to the site root (supports keeping CNAME under src/)
   eleventyConfig.addPassthroughCopy({ 'src/CNAME': 'CNAME' });

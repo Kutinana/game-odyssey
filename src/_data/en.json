@@ -11,6 +11,7 @@
   "projects.search.placeholder": "Search projects, teams or tags",
   "projects.filter.recruiting": "Recruiting only",
   "home.recent.title": "Recent Projects",
-  "home.recent.viewAll": "View all projects"
+  "home.recent.viewAll": "View all projects",
+  "project.noBanner": "No banner yet"
 }
 

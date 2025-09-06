@@ -8,6 +8,10 @@
 <a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors relative mb-4" style="break-inside: avoid;" data-card="1" data-search="{{ (zh_title ~ ' ' ~ en_title ~ ' ' ~ zh_team ~ ' ' ~ en_team ~ ' ' ~ tags_text) | trim }}" data-recruit="{% if cfg.is_recruit %}true{% else %}false{% endif %}" draggable="false">
   {% if cfg.banner %}
   <img src="{{ (project.url | url) }}{{ cfg.banner | replace('./','') }}" alt="{{ zh_title or en_title or cfg.title or project.data.title }}" class="w-full h-40 object-cover no-drag" draggable="false" />
+  {% else %}
+  <div class="w-full h-40 flex items-center justify-center bg-neutral-100 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 select-none">
+    <span data-i18n="project.noBanner">暂无 Banner</span>
+  </div>
   {% endif %}
   {% if cfg.is_recruit %}
   <div class="absolute top-0 left-0 m-2">
