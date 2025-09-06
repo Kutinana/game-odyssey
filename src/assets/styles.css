@@ -897,6 +897,10 @@ html, body {
   transform: translate(-50%, -50%) scale(1);
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
 .fixed {
   position: fixed;
 }
@@ -960,6 +964,10 @@ html, body {
 
 .z-10 {
   z-index: 10;
+}
+
+.z-40 {
+  z-index: 40;
 }
 
 .z-50 {
@@ -1115,8 +1123,17 @@ html, body {
   flex-shrink: 0;
 }
 
+.origin-top {
+  transform-origin: top;
+}
+
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.-translate-y-1 {
+  --tw-translate-y: -0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
@@ -1265,6 +1282,10 @@ html, body {
   border-color: rgb(255 255 255 / 0.2);
 }
 
+.bg-black\/30 {
+  background-color: rgb(0 0 0 / 0.3);
+}
+
 .bg-black\/50 {
   background-color: rgb(0 0 0 / 0.5);
 }
@@ -1293,6 +1314,10 @@ html, body {
 
 .bg-white\/70 {
   background-color: rgb(255 255 255 / 0.7);
+}
+
+.bg-white\/80 {
+  background-color: rgb(255 255 255 / 0.8);
 }
 
 .object-cover {
@@ -1504,6 +1529,12 @@ html, body {
   transition-duration: 150ms;
 }
 
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-colors {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -1518,6 +1549,10 @@ html, body {
 
 .duration-200 {
   transition-duration: 200ms;
+}
+
+.ease-out {
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
 .hero-bg {
@@ -1627,6 +1662,10 @@ html.is-animating.dark-mask::before {
   background-color: rgb(255 255 255 / 0.6);
 }
 
+.hover\:bg-white\/70:hover {
+  background-color: rgb(255 255 255 / 0.7);
+}
+
 .hover\:bg-white\/80:hover {
   background-color: rgb(255 255 255 / 0.8);
 }
@@ -1664,6 +1703,10 @@ html.is-animating.dark-mask::before {
   border-color: rgb(255 255 255 / 0.1);
 }
 
+.dark\:bg-black\/50:is(.dark *) {
+  background-color: rgb(0 0 0 / 0.5);
+}
+
 .dark\:bg-neutral-800:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(38 38 38 / var(--tw-bg-opacity));
@@ -1679,6 +1722,10 @@ html.is-animating.dark-mask::before {
 
 .dark\:bg-neutral-900\/50:is(.dark *) {
   background-color: rgb(23 23 23 / 0.5);
+}
+
+.dark\:bg-neutral-900\/70:is(.dark *) {
+  background-color: rgb(23 23 23 / 0.7);
 }
 
 .dark\:bg-neutral-950:is(.dark *) {
@@ -1763,6 +1810,10 @@ html.is-animating.dark-mask::before {
 
   .md\:flex {
     display: flex;
+  }
+
+  .md\:hidden {
+    display: none;
   }
 
   .md\:text-6xl {
