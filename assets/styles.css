@@ -1724,6 +1724,10 @@ html.is-animating.dark-mask::before {
 }
 
 @media (min-width: 640px) {
+  .sm\:block {
+    display: block;
+  }
+
   .sm\:columns-2 {
     -moz-columns: 2;
          columns: 2;
