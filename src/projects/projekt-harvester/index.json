@@ -1,0 +1,14 @@
+{
+  "en_title": "Projekt Harvester",
+  "banner": "./banner.jpg",
+  "tags": ["PC", "Simulation", "Ludum Dare 52"],
+  "screenshots": [
+    "./screenshots/1.png",
+    "./screenshots/2.png",
+    "./screenshots/3.png",
+    "./screenshots/4.png",
+    "./screenshots/5.png",
+    "./screenshots/6.png"
+  ],
+  "en_markdown": "./contents/en.md"
+}
