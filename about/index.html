@@ -209,7 +209,7 @@
         // Do not bind here to avoid double handlers; handled in bindUi()
 
         // Minimal i18n for nav and CTA
-        var dict = { cn: {"site.title":"香港中文大学（深圳）游戏研究社","site.description":"玩耍，创造，分享","nav.home":"首页","nav.projects":"项目","nav.about":"关于","hero.cta":"查看项目","project.recruiting":"招募中","project.screenshots":"截图","project.screenshots.more":"还有更多……","projects.search.placeholder":"搜索项目、团队或标签","projects.filter.recruiting":"只看招募中"}, en: {"site.title":"CUHK(SZ) Gaming Odyssey","site.description":"Play, Create, Share","nav.home":"Home","nav.projects":"Projects","nav.about":"About","hero.cta":"View Projects","project.recruiting":"Recruiting","project.screenshots":"Screenshots","project.screenshots.more":"and more....","projects.search.placeholder":"Search projects, teams or tags","projects.filter.recruiting":"Recruiting only","home.recent.title":"Recent Projects","home.recent.viewAll":"View all projects"} };
+        var dict = { cn: {"site.title":"香港中文大学（深圳）游戏研究社","site.description":"玩耍，创造，分享","nav.home":"首页","nav.projects":"项目","nav.about":"关于","hero.cta":"查看项目","project.recruiting":"招募中","project.screenshots":"截图","project.screenshots.more":"还有更多……","projects.search.placeholder":"搜索项目、团队或标签","projects.filter.recruiting":"只看招募中","home.recent.title":"最近项目","home.recent.viewAll":"查看全部项目"}, en: {"site.title":"CUHK(SZ) Gaming Odyssey","site.description":"Play, Create, Share","nav.home":"Home","nav.projects":"Projects","nav.about":"About","hero.cta":"View Projects","project.recruiting":"Recruiting","project.screenshots":"Screenshots","project.screenshots.more":"and more....","projects.search.placeholder":"Search projects, teams or tags","projects.filter.recruiting":"Recruiting only","home.recent.title":"Recent Projects","home.recent.viewAll":"View all projects"} };
         var rootLocale = (localStorage.getItem('locale') || 'cn');
         if (rootLocale === 'zh') rootLocale = 'cn';
         var langToggle = document.getElementById('langToggle');
@@ -344,6 +344,59 @@
           if (container) container.classList.remove('opacity-0');
           root.classList.remove('light-mask','dark-mask','is-animating');
         });
+
+        // Enable drag-to-scroll for horizontal tag lists
+        try {
+          var suppressClickUntil = 0;
+          // Capture-phase click suppressor to avoid navigating after a drag
+          if (!document._tagsClickSuppressor) {
+            document.addEventListener('click', function(e){
+              if (Date.now() < suppressClickUntil) {
+                var card = e.target && e.target.closest && e.target.closest('[data-card]');
+                if (card) { e.preventDefault(); e.stopPropagation(); }
+              }
+            }, true);
+            document._tagsClickSuppressor = true;
+          }
+          function enableDragScroll(el) {
+            if (!el || el._dragBound) return;
+            var isDown = false; var startX = 0; var scrollLeft = 0; var moved = false;
+            // Prevent native drag-out of links/images while dragging
+            el.addEventListener('dragstart', function(e){ e.preventDefault(); });
+            el.addEventListener('pointerdown', function(e){
+              isDown = true; moved = false; startX = e.pageX - el.offsetLeft; scrollLeft = el.scrollLeft; el.setPointerCapture(e.pointerId); el.classList.add('cursor-grabbing');
+            });
+            el.addEventListener('pointerleave', function(){ isDown = false; el.classList.remove('cursor-grabbing'); });
+            el.addEventListener('pointerup', function(e){
+              if (moved) {
+                // Suppress the immediate click that would navigate
+                suppressClickUntil = Date.now() + 250;
+                e.preventDefault();
+                e.stopPropagation();
+              }
+              isDown = false; moved = false; el.classList.remove('cursor-grabbing');
+            });
+            el.addEventListener('pointermove', function(e){
+              if (!isDown) return;
+              e.preventDefault();
+              var x = e.pageX - el.offsetLeft; var walk = (x - startX);
+              if (!moved && Math.abs(walk) > 3) moved = true;
+              el.scrollLeft = scrollLeft - walk;
+            });
+            el._dragBound = true;
+          }
+          function bindDragScroll(){
+            document.querySelectorAll('.tags-scroll').forEach(enableDragScroll);
+            // Disable drag on all card images and anchors
+            document.querySelectorAll('[data-card] img, [data-card]').forEach(function(n){
+              try { n.setAttribute('draggable','false'); } catch(e) {}
+              n.addEventListener('dragstart', function(e){ e.preventDefault(); });
+            });
+          }
+          bindDragScroll();
+          // Re-bind after load in case of dynamic content
+          window.addEventListener('load', bindDragScroll);
+        } catch (e) {}
       })();
     </script>
   </body>
