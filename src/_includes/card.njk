@@ -5,9 +5,9 @@
 {% set en_team = (cfg.en_team or '') | trim %}
 {% set tags_list = cfg.tags or [] %}
 {% set tags_text = tags_list | join(' ') %}
-<a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors relative" data-card="1" data-search="{{ (zh_title ~ ' ' ~ en_title ~ ' ' ~ zh_team ~ ' ' ~ en_team ~ ' ' ~ tags_text) | trim }}" data-recruit="{% if cfg.is_recruit %}true{% else %}false{% endif %}">
+<a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors relative mb-4" style="break-inside: avoid;" data-card="1" data-search="{{ (zh_title ~ ' ' ~ en_title ~ ' ' ~ zh_team ~ ' ' ~ en_team ~ ' ' ~ tags_text) | trim }}" data-recruit="{% if cfg.is_recruit %}true{% else %}false{% endif %}" draggable="false">
   {% if cfg.banner %}
-  <img src="{{ (project.url | url) }}{{ cfg.banner | replace('./','') }}" alt="{{ zh_title or en_title or cfg.title or project.data.title }}" class="w-full h-40 object-cover" />
+  <img src="{{ (project.url | url) }}{{ cfg.banner | replace('./','') }}" alt="{{ zh_title or en_title or cfg.title or project.data.title }}" class="w-full h-40 object-cover no-drag" draggable="false" />
   {% endif %}
   {% if cfg.is_recruit %}
   <div class="absolute top-0 left-0 m-2">
@@ -31,9 +31,9 @@
       {% endif %}
     {% endif %}
     {% if tags_list and tags_list.length %}
-      <div class="mt-2 flex flex-wrap gap-2">
+      <div class="mt-2 flex flex-nowrap items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar tags-scroll cursor-grab select-none">
         {% for tag in tags_list %}
-          <span class="inline-block rounded-full px-3 py-1 text-xs font-medium bg-white/60 dark:bg-neutral-900/50 text-neutral-900 dark:text-white border border-black/10 dark:border-white/10">{{ tag }}</span>
+          <span class="inline-block rounded-full px-3 py-1 text-xs font-medium bg-white/60 dark:bg-neutral-900/50 text-neutral-900 dark:text-white border border-black/10 dark:border-white/10 shrink-0">{{ tag }}</span>
         {% endfor %}
       </div>
     {% endif %}

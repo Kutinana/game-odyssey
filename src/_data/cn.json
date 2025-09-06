@@ -9,6 +9,8 @@
   "project.screenshots": "截图",
   "project.screenshots.more": "还有更多……",
   "projects.search.placeholder": "搜索项目、团队或标签",
-  "projects.filter.recruiting": "只看招募中"
+  "projects.filter.recruiting": "只看招募中",
+  "home.recent.title": "最近项目",
+  "home.recent.viewAll": "查看全部项目"
 }
 

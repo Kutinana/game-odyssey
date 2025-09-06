@@ -60,6 +60,14 @@
   .dark .hero-overlay {
     background: linear-gradient(180deg, rgba(10,10,12,0.2), rgba(10,10,12,1));
   }
+  /* Hide scrollbar but allow scroll (cross-browser) */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;    /* Firefox */
+  }
+  .no-scrollbar::-webkit-scrollbar { /* Chrome, Safari */
+    display: none;
+  }
   /* Fade transition container */
   .swup-fade { transition: opacity 450ms ease; }
   html.is-animating .swup-fade { opacity: 0; }

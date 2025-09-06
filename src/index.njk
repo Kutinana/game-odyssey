@@ -8,12 +8,34 @@ en_title: CUHK(SZ) Game Odyssey
 <section class="relative h-screen w-full overflow-hidden bg-white dark:bg-transparent">
   <div class="absolute inset-0 hero-bg" style="{% if site.heroImage %}background-image:url('{{ site.heroImage | url }}'){% endif %}"></div>
   <div class="absolute inset-0 hero-overlay"></div>
-  <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-neutral-900 dark:text-white drop-shadow-sm" data-i18n="site.title">Campus Game Projects</h1>
-    <p class="mt-4 max-w-2xl text-neutral-600 dark:text-neutral-300" data-i18n="site.description">一个校园内的游戏项目聚合门户</p>
-    <a href="{{ '/projects/' | url }}" class="mt-10 inline-flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium border border-black/10 dark:border-white/10 bg-white/70 hover:bg-white/80 text-neutral-900 dark:text-neutral-100 dark:bg-neutral-900/50 dark:hover:bg-neutral-800/60 backdrop-blur-md transition-colors" data-i18n="hero.cta">
-      View Projects
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M4.5 12a.75.75 0 01.75-.75h12.59l-3.72-3.72a.75.75 0 111.06-1.06l5 5a.75.75 0 010 1.06l-5 5a.75.75 0 11-1.06-1.06l3.72-3.72H5.25A.75.75 0 014.5 12z" clip-rule="evenodd"/></svg>
-    </a>
+  <div class="relative z-10 h-full flex flex-col justify-between text-center px-6">
+    <div class="flex-1 flex flex-col items-center justify-center">
+      <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-neutral-900 dark:text-white drop-shadow-sm" data-i18n="site.title">Campus Game Projects</h1>
+      <p class="mt-4 max-w-2xl text-neutral-600 dark:text-neutral-300" data-i18n="site.description">一个校园内的游戏项目聚合门户</p>
+      <a href="{{ '/projects/' | url }}" class="mt-10 inline-flex items-center gap-2 px-5 py-3 rounded-lg text-sm font-medium border border-black/10 dark:border-white/10 bg-white/70 hover:bg-white/80 text-neutral-900 dark:text-neutral-100 dark:bg-neutral-900/50 dark:hover:bg-neutral-800/60 backdrop-blur-md transition-colors" data-i18n="hero.cta">
+        View Projects
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M4.5 12a.75.75 0 01.75-.75h12.59l-3.72-3.72a.75.75 0 111.06-1.06l5 5a.75.75 0 010 1.06l-5 5a.75.75 0 11-1.06-1.06l3.72-3.72H5.25A.75.75 0 014.5 12z" clip-rule="evenodd"/></svg>
+      </a>
+    </div>
+    <div class="mx-auto w-full max-w-6xl px-4 mb-8 md:mb-12 lg:mb-16">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold text-neutral-900 dark:text-white">
+          <span data-locale="cn" style="display:none">{{ cn['home.recent.title'] }}</span>
+          <span data-locale="en" style="display:none">{{ en['home.recent.title'] }}</span>
+        </h2>
+        <a href="{{ '/projects/' | url }}" class="text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white">
+          <span data-locale="cn" style="display:none">{{ cn['home.recent.viewAll'] }}</span>
+          <span data-locale="en" style="display:none">{{ en['home.recent.viewAll'] }}</span>
+        </a>
+      </div>
+      <div class="columns-1 sm:columns-2 lg:columns-3 gap-x-4">
+        {% for project in collections.projects | reverse %}
+          {% if loop.index0 < 3 %}
+            {% set project = project %}
+            {% include "card.njk" %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
   </div>
 </section>
