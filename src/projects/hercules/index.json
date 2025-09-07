@@ -1,0 +1,12 @@
+{
+  "cn_title": "大力，神！Hercules",
+  "banner": "./banner.jpg",
+  "tags": ["PC", "Platformer", "ACT", "GGJ2024"],
+  "screenshots": [
+    "./screenshots/1.jpg",
+    "./screenshots/2.jpg",
+    "./screenshots/3.jpg"
+  ],
+  "en_markdown": "./contents/en.md",
+  "cn_markdown": "./contents/cn.md"
+}
