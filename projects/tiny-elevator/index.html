@@ -481,10 +481,31 @@
         });
 
         // Smooth page transitions on load (content only); clear any mask
-        window.addEventListener('load', function() {
+        function revealContent(){
           var container = document.getElementById('swup');
-          if (container) container.classList.remove('opacity-0');
-          root.classList.remove('light-mask','dark-mask','is-animating');
+          if (!container) {
+            root.classList.remove('light-mask','dark-mask','is-animating');
+            return;
+          }
+          // Ensure a painted frame at opacity:0 even when assets are cached,
+          // so removing the class triggers a visible transition.
+          requestAnimationFrame(function(){
+            requestAnimationFrame(function(){
+              container.classList.remove('opacity-0');
+              root.classList.remove('light-mask','dark-mask','is-animating');
+            });
+          });
+        }
+        window.addEventListener('load', revealContent);
+        // Also handle BFCache restores (back/forward navigation)
+        window.addEventListener('pageshow', function(e){
+          try {
+            if (e && e.persisted) {
+              var container = document.getElementById('swup');
+              if (container) container.classList.add('opacity-0');
+              revealContent();
+            }
+          } catch(_) { revealContent(); }
         });
 
         // Enable drag-to-scroll for horizontal tag lists
