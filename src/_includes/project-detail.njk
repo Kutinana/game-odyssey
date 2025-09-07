@@ -93,13 +93,13 @@ activeNav: projects
     <p data-i18n="projects.missing">No Markdown configured. Please set cn_markdown or en_markdown in index.json.</p>
   </article>
   {% elif has_zh and not has_en %}
-  <article class="md-content">{{ zh_md_raw | stripMdTitle | markdown | safe }}</article>
+  <article class="md-content">{{ zh_md_raw | markdown | safe }}</article>
   {% elif has_en and not has_zh %}
-  <article class="md-content">{{ en_md_raw | stripMdTitle | markdown | safe }}</article>
+  <article class="md-content">{{ en_md_raw | markdown | safe }}</article>
   {% else %}
   <div>
-    <article data-locale="cn" class="md-content" style="display:none">{{ zh_md_raw | stripMdTitle | markdown | safe }}</article>
-    <article data-locale="en" class="md-content" style="display:none">{{ en_md_raw | stripMdTitle | markdown | safe }}</article>
+    <article data-locale="cn" class="md-content" style="display:none">{{ zh_md_raw | markdown | safe }}</article>
+    <article data-locale="en" class="md-content" style="display:none">{{ en_md_raw | markdown | safe }}</article>
   </div>
   {% endif %}
   {% if screenshots %}
