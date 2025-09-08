@@ -1353,11 +1353,6 @@ html, body {
   background-color: rgb(255 255 255 / 0.8);
 }
 
-.object-cover {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
 .p-4 {
   padding: 1rem;
 }
