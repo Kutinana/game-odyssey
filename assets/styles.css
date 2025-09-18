@@ -1353,6 +1353,11 @@ html, body {
   background-color: rgb(255 255 255 / 0.8);
 }
 
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .p-4 {
   padding: 1rem;
 }
@@ -1407,6 +1412,10 @@ html, body {
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pt-\[56\.25\%\] {
+  padding-top: 56.25%;
 }
 
 .text-center {
@@ -1813,6 +1822,10 @@ html.is-animating.dark-mask::before {
     display: block;
   }
 
+  .sm\:hidden {
+    display: none;
+  }
+
   .sm\:columns-2 {
     -moz-columns: 2;
          columns: 2;
@@ -1863,6 +1876,10 @@ html.is-animating.dark-mask::before {
 @media (min-width: 1024px) {
   .lg\:mb-16 {
     margin-bottom: 4rem;
+  }
+
+  .lg\:block {
+    display: block;
   }
 
   .lg\:columns-3 {
