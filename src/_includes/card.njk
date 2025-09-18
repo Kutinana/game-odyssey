@@ -5,13 +5,27 @@
 {% set en_team = (cfg.en_team or '') | trim %}
 {% set tags_list = cfg.tags or [] %}
 {% set tags_text = tags_list | join(' ') %}
-<a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors relative mb-4" style="break-inside: avoid;" data-card="1" data-search="{{ (zh_title ~ ' ' ~ en_title ~ ' ' ~ zh_team ~ ' ' ~ en_team ~ ' ' ~ tags_text) | trim }}" data-recruit="{% if cfg.is_recruit %}true{% else %}false{% endif %}" draggable="false">
+<a href="{{ project.url | url }}" class="block rounded-lg overflow-hidden bg-white border border-black/10 text-neutral-900 hover:bg-white/90 dark:bg-neutral-800 dark:border-white/10 dark:text-white dark:hover:bg-neutral-700 transition-colors relative mb-4{% if extraClass %} {{ extraClass }}{% endif %}" style="break-inside: avoid;" data-card="1" data-search="{{ (zh_title ~ ' ' ~ en_title ~ ' ' ~ zh_team ~ ' ' ~ en_team ~ ' ' ~ tags_text) | trim }}" data-recruit="{% if cfg.is_recruit %}true{% else %}false{% endif %}" draggable="false">
   {% if cfg.banner %}
+  {% if forceAspect %}
+  <div class="relative pt-[56.25%]">
+    <img src="{{ (project.url | url) }}{{ cfg.banner | replace('./','') }}" alt="{{ zh_title or en_title or cfg.title or project.data.title }}" class="absolute inset-0 w-full h-full object-cover no-drag" draggable="false" />
+  </div>
+  {% else %}
   <img src="{{ (project.url | url) }}{{ cfg.banner | replace('./','') }}" alt="{{ zh_title or en_title or cfg.title or project.data.title }}" class="w-full h-auto no-drag" draggable="false" />
+  {% endif %}
+  {% else %}
+  {% if forceAspect %}
+  <div class="relative pt-[56.25%]">
+    <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-neutral-100 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 select-none">
+      <span data-i18n="project.noBanner">暂无 Banner</span>
+    </div>
+  </div>
   {% else %}
   <div class="w-full h-40 flex items-center justify-center bg-neutral-100 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-300 select-none">
     <span data-i18n="project.noBanner">暂无 Banner</span>
   </div>
+  {% endif %}
   {% endif %}
   {% if cfg.is_recruit %}
   <div class="absolute top-0 left-0 m-2">

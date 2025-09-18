@@ -32,6 +32,12 @@ en_title: CUHK(SZ) Game Odyssey
         {% for project in collections.projects | reverse %}
           {% if loop.index0 < 3 %}
             {% set project = project %}
+            {% if loop.index0 == 2 %}
+              {% set extraClass = 'sm:hidden lg:block' %}
+            {% else %}
+              {% set extraClass = '' %}
+            {% endif %}
+            {% set forceAspect = true %}
             {% include "card.njk" %}
           {% endif %}
         {% endfor %}
